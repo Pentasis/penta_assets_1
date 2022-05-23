@@ -1,0 +1,109 @@
+local modelList = {
+    { "vehicle/plane/airbus_a320.mdl", "name", "ui/assets/vehicles/icon.tga" },
+    { "vehicle/plane/bae_146.mdl", "name", "ui/assets/vehicles/icon.tga" },
+    { "vehicle/plane/bae_146_cargo.mdl", "name", "ui/assets/vehicles/icon.tga" },
+}
+
+local function getIconList()
+    local iconList = {}
+
+    for key, value in ipairs(modelList) do
+        iconList[key] = value[3]
+    end
+
+    return iconList
+end
+
+local function getNameList()
+    local nameList = {}
+
+    for key, value in ipairs(modelList) do
+        nameList[key] = value[2]
+    end
+
+    return nameList
+end
+
+function data()
+
+    return {
+        type = "ASSET_DEFAULT",
+        description = {
+            name = "Planes",
+            description = "All vanilla planes",
+        },
+        availability = {
+            yearFrom = 1850,
+            yearTo = 0,
+        },
+        buildMode = "MULTI",
+        categories = { "vehicles" },
+        order = 100,
+        skipCollision = true,
+        autoRemovable = false,
+
+        params = {
+            {
+                key = "asset",
+                name = "Plane",
+                uiType = "ICON_BUTTON",
+                values = getIconList,
+            },
+            {
+                key = "asset",
+                name = "Plane",
+                uiType = "ICON_BUTTON",
+                values = getIconList,
+            },
+            {
+                key = "asset_size",
+                name = "Scale",
+                uiType = "SLIDER",
+                values = { "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x", "3.0x", "4.0x" },
+                defaultIndex = 3,
+                tooltip = "Scales the asset to this size.",
+            },
+            {
+                key = "terrain_alignment",
+                name = "Align to terrain",
+                uiType = "CHECKBOX",
+                values = { "0", "1" },
+                defaultIndex = 0,
+            },
+        },
+
+        updateFn = function(params)
+            local result = {}
+
+            result.models = {}
+
+            local size = 1.0
+            local alignment = false
+
+            if params.asset_size == 0 then size = 0.25 end
+            if params.asset_size == 1 then size = 0.5 end
+            if params.asset_size == 2 then size = 0.75 end
+            if params.asset_size == 3 then size = 1.0 end -- default
+            if params.asset_size == 4 then size = 1.5 end
+            if params.asset_size == 5 then size = 2.0 end
+            if params.asset_size == 6 then size = 3.0 end
+            if params.asset_size == 7 then size = 4.0 end
+
+            if params.terrain_alignment == 0 then alignment = false end
+            if params.terrain_alignment == 1 then alignment = true end
+
+            result.models[#result.models + 1] = {
+                id = modelList[params.asset][1],
+                transf = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }
+            }
+
+
+            result.terrainAlignmentLists = {
+                { type = "EQUAL", faces = {} }
+            }
+
+            return result
+        end
+    }
+
+end
