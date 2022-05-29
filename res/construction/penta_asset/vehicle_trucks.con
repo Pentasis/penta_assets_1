@@ -1,0 +1,140 @@
+local helper = require "penta_assets/asset_helper"
+
+local modelList = {
+    { "", "vehicle/truck/40_tons.mdl" },
+    { "", "vehicle/truck/40_tons_stake.mdl" },
+    { "", "vehicle/truck/40_tons_tanker.mdl" },
+    { "", "vehicle/truck/asia/amo_f15_tanker.mdl" },
+    { "", "vehicle/truck/asia/amo_f15_universal.mdl" },
+    { "", "vehicle/truck/asia/faw_jiefang_j6p_stake.mdl" },
+    { "", "vehicle/truck/asia/faw_jiefang_j6p_tanker.mdl" },
+    { "", "vehicle/truck/asia/faw_jiefang_j6p_tipper.mdl" },
+    { "", "vehicle/truck/asia/faw_jiefang_j6p_universal.mdl" },
+    { "", "vehicle/truck/asia/gaz_3307_tanker.mdl" },
+    { "", "vehicle/truck/asia/gaz_3307_tipper.mdl" },
+    { "", "vehicle/truck/asia/gaz_3307_universal.mdl" },
+    { "", "vehicle/truck/asia/gaz_mm_stake.mdl" },
+    { "", "vehicle/truck/asia/gaz_mm_universal.mdl" },
+    { "", "vehicle/truck/asia/horse_cart_as_1850.mdl" },
+    { "", "vehicle/truck/asia/isuzu_elf_tld20_tanker.mdl" },
+    { "", "vehicle/truck/asia/isuzu_elf_tld20_universal.mdl" },
+    { "", "vehicle/truck/asia/nw_first_truck.mdl" },
+    { "", "vehicle/truck/asia/telega_stake.mdl" },
+    { "", "vehicle/truck/asia/telega_universal.mdl" },
+    { "", "vehicle/truck/asia/zis_150_tanker.mdl" },
+    { "", "vehicle/truck/asia/zis_150_tipper.mdl" },
+    { "", "vehicle/truck/asia/zis_150_universal.mdl" },
+    { "", "vehicle/truck/benz1912_lkw.mdl" },
+    { "", "vehicle/truck/benz1912_lkw_stake.mdl" },
+    { "", "vehicle/truck/dmg_cannstatt.mdl" },
+    { "", "vehicle/truck/horsewagon_1850.mdl" },
+    { "", "vehicle/truck/horse_cart.mdl" },
+    { "", "vehicle/truck/horse_cart_universal.mdl" },
+    { "", "vehicle/truck/man_19_304_1970.mdl" },
+    { "", "vehicle/truck/man_19_304_tanker.mdl" },
+    { "", "vehicle/truck/man_19_304_tipper.mdl" },
+    { "", "vehicle/truck/opel_blitz_1930.mdl" },
+    { "", "vehicle/truck/opel_blitz_tanker.mdl" },
+    { "", "vehicle/truck/opel_blitz_tipper.mdl" },
+    { "", "vehicle/truck/saurer_c_typ_stake.mdl" },
+    { "", "vehicle/truck/saurer_c_typ_tanker.mdl" },
+    { "", "vehicle/truck/saurer_c_typ_tipper.mdl" },
+    { "", "vehicle/truck/saurer_c_typ_universal.mdl" },
+    { "", "vehicle/truck/urban_etruck.mdl" },
+    { "", "vehicle/truck/usa/american_horse_cart.mdl" },
+    { "", "vehicle/truck/usa/american_horse_cart_universal.mdl" },
+    { "", "vehicle/truck/usa/american_truck_359.mdl" },
+    { "", "vehicle/truck/usa/cascadia_2009.mdl" },
+    { "", "vehicle/truck/usa/cascadia_2009_tanker.mdl" },
+    { "", "vehicle/truck/usa/ford_m77.mdl" },
+    { "", "vehicle/truck/usa/ford_m77_universal.mdl" },
+    { "", "vehicle/truck/usa/horsewagon_1850_usa.mdl" },
+    { "", "vehicle/truck/usa/mack_ac.mdl" },
+    { "", "vehicle/truck/usa/mack_ac_universal.mdl" },
+    { "", "vehicle/truck/usa/steam_lorry.mdl" },
+    { "", "vehicle/truck/usa/steam_lorry_universal.mdl" },
+    { "", "vehicle/truck/usa/studebaker_us6_u10.mdl" },
+    { "", "vehicle/truck/usa/studebaker_us6_u3.mdl" },
+    { "", "vehicle/truck/usa/studebaker_us6_u5.mdl" },
+    { "", "vehicle/truck/usa/studebaker_us_universal.mdl" },
+}
+
+function data()
+
+    return {
+        type = "ASSET_DEFAULT",
+        description = {
+            name = "Trucks",
+            description = "All vanilla trucks",
+        },
+        availability = {
+            yearFrom = 1850,
+            yearTo = 0,
+        },
+        buildMode = "MULTI",
+        categories = { "vehicles" },
+        order = 100,
+        skipCollision = true,
+        autoRemovable = false,
+
+        params = {
+            {
+                key = "asset",
+                name = "Trucks",
+                uiType = "BUTTON", -- "ICON_BUTTON",
+                values = helper.getButtonValues(modelList, 1), -- helper.getButtonValues(modelList, 0)
+            },
+            {
+                key = "asset_size",
+                name = "Scale",
+                uiType = "SLIDER",
+                values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
+                defaultIndex = 3,
+                tooltip = "Scales the asset's size.",
+            },
+            --{
+            --    key = "terrain_alignment",
+            --    name = "Align to terrain",
+            --    uiType = "CHECKBOX",
+            --    values = { "0", "1" },
+            --    defaultIndex = 0,
+            --},
+        },
+
+        updateFn = function(params)
+            local result = {}
+
+            result.models = {}
+
+            local size = 1.0
+            --local alignment = false
+
+            if params.asset_size == 0 then size = 0.1 end
+            if params.asset_size == 1 then size = 0.25 end
+            if params.asset_size == 2 then size = 0.5 end
+            if params.asset_size == 3 then size = 0.75 end
+            if params.asset_size == 4 then size = 1.0 end -- default
+            if params.asset_size == 5 then size = 1.5 end
+            if params.asset_size == 6 then size = 2.0 end
+
+            --if params.terrain_alignment == 0 then alignment = false end
+            --if params.terrain_alignment == 1 then alignment = true end
+
+            for i = 0, #modelList - 1, 1 do
+                if params.asset == i then
+                    result.models[#result.models + 1] = {
+                        id = modelList[i + 1][1],
+                        transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
+                    }
+                end
+            end
+
+            result.terrainAlignmentLists = {
+                { type = "EQUAL", faces = {} }
+            }
+
+            return result
+        end
+    }
+
+end

@@ -1,0 +1,113 @@
+local helper = require "penta_assets/asset_helper"
+
+local modelList = {
+    { "", "vehicle/bus/aboag.mdl" },
+    { "", "vehicle/bus/asia/bk_670.mdl" },
+    { "", "vehicle/bus/asia/droshky.mdl" },
+    { "", "vehicle/bus/asia/dux.mdl" },
+    { "", "vehicle/bus/asia/fuso_b46.mdl" },
+    { "", "vehicle/bus/asia/gaggenau_c40.mdl" },
+    { "", "vehicle/bus/asia/maz_103.mdl" },
+    { "", "vehicle/bus/asia/troika.mdl" },
+    { "", "vehicle/bus/asia/zis_155.mdl" },
+    { "", "vehicle/bus/asia/zuhai_gtq_6186bevbt3.mdl" },
+    { "", "vehicle/bus/benz_o6600.mdl" },
+    { "", "vehicle/bus/berkhof_duvedec.mdl" },
+    { "", "vehicle/bus/ecitaro.mdl" },
+    { "", "vehicle/bus/et13.mdl" },
+    { "", "vehicle/bus/landauer.mdl" },
+    { "", "vehicle/bus/man_sl_192.mdl" },
+    { "", "vehicle/bus/obeissante.mdl" },
+    { "", "vehicle/bus/postkutsche.mdl" },
+    { "", "vehicle/bus/saurer_tuescher.mdl" },
+    { "", "vehicle/bus/usa/american_post_coach.mdl" },
+    { "", "vehicle/bus/usa/chevrolet_c60_1974.mdl" },
+    { "", "vehicle/bus/usa/d40.mdl" },
+    { "", "vehicle/bus/usa/gm_fishbowl.mdl" },
+    { "", "vehicle/bus/usa/horse_carriage.mdl" },
+    { "", "vehicle/bus/usa/mack_1900_usa.mdl" },
+    { "", "vehicle/bus/usa/schneider_pb2.mdl" },
+    { "", "vehicle/bus/usa/twin_coach.mdl" },
+    { "", "vehicle/bus/usa/wright_streetcar_rtv.mdl" },
+    { "", "vehicle/bus/volvo_5000.mdl" },
+}
+
+function data()
+
+    return {
+        type = "ASSET_DEFAULT",
+        description = {
+            name = "Busses",
+            description = "All vanilla busses",
+        },
+        availability = {
+            yearFrom = 1850,
+            yearTo = 0,
+        },
+        buildMode = "MULTI",
+        categories = { "vehicles" },
+        order = 100,
+        skipCollision = true,
+        autoRemovable = false,
+
+        params = {
+            {
+                key = "asset",
+                name = "Busses",
+                uiType = "BUTTON", -- "ICON_BUTTON",
+                values = helper.getButtonValues(modelList, 1), -- helper.getButtonValues(modelList, 0)
+            },
+            {
+                key = "asset_size",
+                name = "Scale",
+                uiType = "SLIDER",
+                values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
+                defaultIndex = 3,
+                tooltip = "Scales the asset's size.",
+            },
+            --{
+            --    key = "terrain_alignment",
+            --    name = "Align to terrain",
+            --    uiType = "CHECKBOX",
+            --    values = { "0", "1" },
+            --    defaultIndex = 0,
+            --},
+        },
+
+        updateFn = function(params)
+            local result = {}
+
+            result.models = {}
+
+            local size = 1.0
+            --local alignment = false
+
+            if params.asset_size == 0 then size = 0.1 end
+            if params.asset_size == 1 then size = 0.25 end
+            if params.asset_size == 2 then size = 0.5 end
+            if params.asset_size == 3 then size = 0.75 end
+            if params.asset_size == 4 then size = 1.0 end -- default
+            if params.asset_size == 5 then size = 1.5 end
+            if params.asset_size == 6 then size = 2.0 end
+
+            --if params.terrain_alignment == 0 then alignment = false end
+            --if params.terrain_alignment == 1 then alignment = true end
+
+            for i = 0, #modelList - 1, 1 do
+                if params.asset == i then
+                    result.models[#result.models + 1] = {
+                        id = modelList[i + 1][1],
+                        transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
+                    }
+                end
+            end
+
+            result.terrainAlignmentLists = {
+                { type = "EQUAL", faces = {} }
+            }
+
+            return result
+        end
+    }
+
+end
