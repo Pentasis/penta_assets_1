@@ -1,15 +1,33 @@
 local asset_helper = {}
 
-asset_helper.NAME = 1
-asset_helper.ICON = 0
+function asset_helper.dump(o)
+    if type(o) == 'table' then
+        local s = '{ '
+        for k, v in pairs(o) do
+            if type(k) ~= 'number' then k = '"' .. k .. '"' end
+            s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
+        end
+        return s .. '} '
+    else
+        return tostring(o)
+    end
+end
 
--- TODO: Split into 2 (local) functions
-function asset_helper.getButtonValues(asset_list, type)
+-- ---------------------------------------------------------------
+
+function asset_helper.getButtonValues(asset_list)
     local value_list = {}
 
     for key, value in ipairs(asset_list) do
-        value_list[key] = value[type]
+        value_list[key] = value[1]
     end
+
+    return value_list
+end
+
+function asset_helper.getIconValues(asset_list)
+    local value_list = {}
+
 
     return value_list
 end

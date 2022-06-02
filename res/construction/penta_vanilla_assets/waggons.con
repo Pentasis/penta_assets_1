@@ -91,52 +91,33 @@ function data()
                 key = "asset",
                 name = "Waggons",
                 uiType = "BUTTON", -- "ICON_BUTTON",
-                values = helper.getButtonValues(modelList, 1), -- helper.getButtonValues(modelList, 0)
+                values = helper.getButtonValues(modelList), -- helper.getIconValues(modelList, 0)
             },
             {
                 key = "asset_size",
                 name = "Scale",
                 uiType = "SLIDER",
                 values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
-                defaultIndex = 3,
+                defaultIndex = 4,
                 tooltip = "Scales the asset's size.",
             },
-            --{
-            --    key = "terrain_alignment",
-            --    name = "Align to terrain",
-            --    uiType = "CHECKBOX",
-            --    values = { "0", "1" },
-            --    defaultIndex = 0,
-            --},
         },
 
         updateFn = function(params)
             local result = {}
+            local sizeFactor = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
 
+            -- because lua is one-indexed, but the parameter value is (for some reason) zero-indexed:
+            params.asset = params.asset + 1
+            params.asset_size = params.asset_size + 1
+
+            local size = sizeFactor[params.asset_size]
             result.models = {}
 
-            local size = 1.0
-            --local alignment = false
-
-            if params.asset_size == 0 then size = 0.1 end
-            if params.asset_size == 1 then size = 0.25 end
-            if params.asset_size == 2 then size = 0.5 end
-            if params.asset_size == 3 then size = 0.75 end
-            if params.asset_size == 4 then size = 1.0 end -- default
-            if params.asset_size == 5 then size = 1.5 end
-            if params.asset_size == 6 then size = 2.0 end
-
-            --if params.terrain_alignment == 0 then alignment = false end
-            --if params.terrain_alignment == 1 then alignment = true end
-
-            for i = 0, #modelList - 1, 1 do
-                if params.asset == i then
-                    result.models[#result.models + 1] = {
-                        id = modelList[i + 1][1],
-                        transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
-                    }
-                end
-            end
+            result.models = { {
+                id = modelList[params.asset][2], -- Index 2 is the model uri
+                transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
+            } }
 
             result.terrainAlignmentLists = {
                 { type = "EQUAL", faces = {} }

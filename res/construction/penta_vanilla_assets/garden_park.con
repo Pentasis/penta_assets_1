@@ -1,0 +1,110 @@
+local helper = require "penta_assets/asset_helper"
+
+local modelList = {
+    { "", "asset/ground/era_a/garden_sunshade_01_a.mdl" },
+    { "", "asset/ground/era_a/garden_sunshade_01_b.mdl" },
+    { "", "asset/ground/era_a/garden_sunshade_02_a.mdl" },
+    { "", "asset/ground/era_a/garden_sunshade_02_b.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_01_a.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_01_b.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_01_closed_a.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_01_closed_b.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_02_a.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_02_b.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_02_closed_a.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_large_02_closed_b.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_small_01_a.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_small_01_b.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_small_02_a.mdl" },
+    { "", "asset/ground/era_b/garden_sunshade_small_02_b.mdl" },
+    { "", "asset/ground/fountain_1.mdl" },
+    { "", "asset/ground/garden.mdl" },
+    { "", "asset/ground/garden_bench_ratan_01_end.mdl" },
+    { "", "asset/ground/garden_bench_ratan_01_repeat.mdl" },
+    { "", "asset/ground/garden_bench_ratan_01_start.mdl" },
+    { "", "asset/ground/garden_bench_stone_01.mdl" },
+    { "", "asset/ground/garden_bench_wood_01.mdl" },
+    { "", "asset/ground/garden_bench_wood_02.mdl" },
+    { "", "asset/ground/garden_chair_metal_01.mdl" },
+    { "", "asset/ground/garden_chair_plastic_01.mdl" },
+    { "", "asset/ground/garden_chair_wood_01.mdl" },
+    { "", "asset/ground/garden_sunshade_large_01.mdl" },
+    { "", "asset/ground/garden_sunshade_large_02.mdl" },
+    { "", "asset/ground/garden_sunshade_large_closed_01.mdl" },
+    { "", "asset/ground/garden_sunshade_large_closed_02.mdl" },
+    { "", "asset/ground/garden_sunshade_small_01.mdl" },
+    { "", "asset/ground/garden_sunshade_small_02.mdl" },
+    { "", "asset/ground/garden_sun_pavillion_01.mdl" },
+    { "", "asset/ground/garden_swing_01.mdl" },
+    { "", "asset/ground/garden_swing_02.mdl" },
+    { "", "asset/ground/garden_swing_03.mdl" },
+    { "", "asset/ground/garden_swing_04.mdl" },
+    { "", "asset/ground/garden_swing_05.mdl" },
+    { "", "asset/ground/garden_table_metal_01.mdl" },
+    { "", "asset/ground/garden_table_ratan_01.mdl" },
+    { "", "asset/ground/garden_table_round_metal_01.mdl" },
+    { "", "asset/ground/garden_table_round_wood_01.mdl" },
+    { "", "asset/ground/garden_table_wood_01.mdl" },
+    { "", "asset/ground/garden_table_wood_02.mdl" },
+}
+
+function data()
+
+    return {
+        type = "ASSET_DEFAULT",
+        description = {
+            name = "Gardens and Parks",
+            description = "All vanilla garden and park props",
+        },
+        availability = {
+            yearFrom = 1850,
+            yearTo = 0,
+        },
+        buildMode = "MULTI",
+        categories = { "residential" },
+        order = 100,
+        skipCollision = true,
+        autoRemovable = false,
+
+        params = {
+            {
+                key = "asset",
+                name = "Gardens and Parks",
+                uiType = "BUTTON", -- "ICON_BUTTON",
+                values = helper.getButtonValues(modelList), -- helper.getIconValues(modelList, 0)
+            },
+            {
+                key = "asset_size",
+                name = "Scale",
+                uiType = "SLIDER",
+                values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
+                defaultIndex = 4,
+                tooltip = "Scales the asset's size.",
+            },
+        },
+
+        updateFn = function(params)
+            local result = {}
+            local sizeFactor = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
+
+            -- because lua is one-indexed, but the parameter value is (for some reason) zero-indexed:
+            params.asset = params.asset + 1
+            params.asset_size = params.asset_size + 1
+
+            local size = sizeFactor[params.asset_size]
+            result.models = {}
+
+            result.models = { {
+                id = modelList[params.asset][2], -- Index 2 is the model uri
+                transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
+            } }
+
+            result.terrainAlignmentLists = {
+                { type = "EQUAL", faces = {} }
+            }
+
+            return result
+        end
+    }
+
+end
