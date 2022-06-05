@@ -1,94 +1,94 @@
 local helper = require "penta_assets/asset_helper"
 
 local modelList = {
-    { "", "vehicle/bus/aboag.mdl" },
-    { "", "vehicle/bus/asia/bk_670.mdl" },
-    { "", "vehicle/bus/asia/droshky.mdl" },
-    { "", "vehicle/bus/asia/dux.mdl" },
-    { "", "vehicle/bus/asia/fuso_b46.mdl" },
-    { "", "vehicle/bus/asia/gaggenau_c40.mdl" },
-    { "", "vehicle/bus/asia/maz_103.mdl" },
-    { "", "vehicle/bus/asia/troika.mdl" },
-    { "", "vehicle/bus/asia/zis_155.mdl" },
-    { "", "vehicle/bus/asia/zuhai_gtq_6186bevbt3.mdl" },
-    { "", "vehicle/bus/benz_o6600.mdl" },
-    { "", "vehicle/bus/berkhof_duvedec.mdl" },
-    { "", "vehicle/bus/ecitaro.mdl" },
-    { "", "vehicle/bus/et13.mdl" },
-    { "", "vehicle/bus/landauer.mdl" },
-    { "", "vehicle/bus/man_sl_192.mdl" },
-    { "", "vehicle/bus/obeissante.mdl" },
-    { "", "vehicle/bus/postkutsche.mdl" },
-    { "", "vehicle/bus/saurer_tuescher.mdl" },
-    { "", "vehicle/bus/usa/american_post_coach.mdl" },
-    { "", "vehicle/bus/usa/chevrolet_c60_1974.mdl" },
-    { "", "vehicle/bus/usa/d40.mdl" },
-    { "", "vehicle/bus/usa/gm_fishbowl.mdl" },
-    { "", "vehicle/bus/usa/horse_carriage.mdl" },
-    { "", "vehicle/bus/usa/mack_1900_usa.mdl" },
-    { "", "vehicle/bus/usa/schneider_pb2.mdl" },
-    { "", "vehicle/bus/usa/twin_coach.mdl" },
-    { "", "vehicle/bus/usa/wright_streetcar_rtv.mdl" },
-    { "", "vehicle/bus/volvo_5000.mdl" },
+  { "", "vehicle/bus/aboag.mdl" },
+  { "", "vehicle/bus/asia/bk_670.mdl" },
+  { "", "vehicle/bus/asia/droshky.mdl" },
+  { "", "vehicle/bus/asia/dux.mdl" },
+  { "", "vehicle/bus/asia/fuso_b46.mdl" },
+  { "", "vehicle/bus/asia/gaggenau_c40.mdl" },
+  { "", "vehicle/bus/asia/maz_103.mdl" },
+  { "", "vehicle/bus/asia/troika.mdl" },
+  { "", "vehicle/bus/asia/zis_155.mdl" },
+  { "", "vehicle/bus/asia/zuhai_gtq_6186bevbt3.mdl" },
+  { "", "vehicle/bus/benz_o6600.mdl" },
+  { "", "vehicle/bus/berkhof_duvedec.mdl" },
+  { "", "vehicle/bus/ecitaro.mdl" },
+  { "", "vehicle/bus/et13.mdl" },
+  { "", "vehicle/bus/landauer.mdl" },
+  { "", "vehicle/bus/man_sl_192.mdl" },
+  { "", "vehicle/bus/obeissante.mdl" },
+  { "", "vehicle/bus/postkutsche.mdl" },
+  { "", "vehicle/bus/saurer_tuescher.mdl" },
+  { "", "vehicle/bus/usa/american_post_coach.mdl" },
+  { "", "vehicle/bus/usa/chevrolet_c60_1974.mdl" },
+  { "", "vehicle/bus/usa/d40.mdl" },
+  { "", "vehicle/bus/usa/gm_fishbowl.mdl" },
+  { "", "vehicle/bus/usa/horse_carriage.mdl" },
+  { "", "vehicle/bus/usa/mack_1900_usa.mdl" },
+  { "", "vehicle/bus/usa/schneider_pb2.mdl" },
+  { "", "vehicle/bus/usa/twin_coach.mdl" },
+  { "", "vehicle/bus/usa/wright_streetcar_rtv.mdl" },
+  { "", "vehicle/bus/volvo_5000.mdl" },
 }
 
 function data()
 
-    return {
-        type = "ASSET_DEFAULT",
-        description = {
-            name = "Busses",
-            description = "All vanilla busses",
-        },
-        availability = {
-            yearFrom = 1850,
-            yearTo = 0,
-        },
-        buildMode = "MULTI",
-        categories = { "vehicles" },
-        order = 100,
-        skipCollision = true,
-        autoRemovable = false,
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = "Busses",
+      description = "All vanilla busses",
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = { "vehicles" },
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
 
-        params = {
-            {
-                key = "asset",
-                name = "Busses",
-                uiType = "BUTTON", -- "ICON_BUTTON",
-                values = helper.getButtonValues(modelList), -- helper.getIconValues(modelList, 0)
-            },
-            {
-                key = "asset_size",
-                name = "Scale",
-                uiType = "SLIDER",
-                values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
-                defaultIndex = 4,
-                tooltip = "Scales the asset's size.",
-            },
-        },
+    params = {
+      {
+        key = "asset",
+        name = "Busses",
+        uiType = "BUTTON", -- "ICON_BUTTON",
+        values = helper.getButtonValues(modelList), -- helper.getIconValues(modelList, 0)
+      },
+      {
+        key = "asset_size",
+        name = "Scale",
+        uiType = "SLIDER",
+        values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
+        defaultIndex = 4,
+        tooltip = "Scales the asset's size.",
+      },
+    },
 
-        updateFn = function(params)
-            local result = {}
-            local sizeFactor = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
+    updateFn = function(params)
+      -- because lua is one-indexed, but the parameter value is (for some reason) zero-indexed:
+      params.asset = params.asset + 1
+      params.asset_size = params.asset_size + 1
 
-            -- because lua is one-indexed, but the parameter value is (for some reason) zero-indexed:
-            params.asset = params.asset + 1
-            params.asset_size = params.asset_size + 1
+      local SCALE_FACTORS = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
+      local MODEL_FILE_INDEX = 2
+      local size = SCALE_FACTORS[params.asset_size]
+      local result = {}
+      result.models = {}
 
-            local size = sizeFactor[params.asset_size]
-            result.models = {}
+      result.models = { {
+        id = modelList[params.asset][MODEL_FILE_INDEX],
+        transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
+      } }
 
-            result.models = { {
-                id = modelList[params.asset][2], -- Index 2 is the model uri
-                transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
-            } }
+      result.terrainAlignmentLists = {
+        { type = "EQUAL", faces = {} }
+      }
 
-            result.terrainAlignmentLists = {
-                { type = "EQUAL", faces = {} }
-            }
-
-            return result
-        end
-    }
+      return result
+    end
+  }
 
 end
