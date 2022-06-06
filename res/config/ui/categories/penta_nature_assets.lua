@@ -1,6 +1,6 @@
 function data()
     return {
         name = _("Nature"),
-        order = 2,
+        order = 5000,
     }
 end

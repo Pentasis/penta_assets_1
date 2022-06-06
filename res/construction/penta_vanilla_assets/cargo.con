@@ -1,131 +1,101 @@
 local helper = require "penta_assets/asset_helper"
 
-local modelList = {
-    { "", "industry/cargo/alcohol_big.mdl" },
-    { "", "industry/cargo/alcohol_small.mdl" },
-    { "", "industry/cargo/cargomix1.mdl" },
-    { "", "industry/cargo/cargomix2.mdl" },
-    { "", "industry/cargo/cargomix3.mdl" },
-    { "", "industry/cargo/cargomix4.mdl" },
-    { "", "industry/cargo/coal_big.mdl" },
-    { "", "industry/cargo/coal_small.mdl" },
-    { "", "industry/cargo/coffee_big.mdl" },
-    { "", "industry/cargo/coffee_small.mdl" },
-    { "", "industry/cargo/construction_materials_big.mdl" },
-    { "", "industry/cargo/construction_materials_small.mdl" },
-    { "", "industry/cargo/crude_big.mdl" },
-    { "", "industry/cargo/crude_small.mdl" },
-    { "", "industry/cargo/fish_big.mdl" },
-    { "", "industry/cargo/fish_small.mdl" },
-    { "", "industry/cargo/food_big.mdl" },
-    { "", "industry/cargo/food_small.mdl" },
-    { "", "industry/cargo/fuel_big.mdl" },
-    { "", "industry/cargo/fuel_small.mdl" },
-    { "", "industry/cargo/goods_big.mdl" },
-    { "", "industry/cargo/goods_small.mdl" },
-    { "", "industry/cargo/grain_big.mdl" },
-    { "", "industry/cargo/grain_small.mdl" },
-    { "", "industry/cargo/iron_ore_big.mdl" },
-    { "", "industry/cargo/iron_ore_small.mdl" },
-    { "", "industry/cargo/level/coal_level_2x1.mdl" },
-    { "", "industry/cargo/level/coal_level_4x1.mdl" },
-    { "", "industry/cargo/level/grain_level_2x1.mdl" },
-    { "", "industry/cargo/level/grain_level_4x1.mdl" },
-    { "", "industry/cargo/level/iron_ore_level_2x1.mdl" },
-    { "", "industry/cargo/level/iron_ore_level_4x1.mdl" },
-    { "", "industry/cargo/level/slag_level_2x1.mdl" },
-    { "", "industry/cargo/level/slag_level_4x1.mdl" },
-    { "", "industry/cargo/level/stone_level_2x1.mdl" },
-    { "", "industry/cargo/level/stone_level_4x1.mdl" },
-    { "", "industry/cargo/livestock_big.mdl" },
-    { "", "industry/cargo/livestock_small.mdl" },
-    { "", "industry/cargo/logs_big.mdl" },
-    { "", "industry/cargo/logs_small.mdl" },
-    { "", "industry/cargo/machines_big.mdl" },
-    { "", "industry/cargo/machines_small.mdl" },
-    { "", "industry/cargo/marble_big.mdl" },
-    { "", "industry/cargo/marble_small.mdl" },
-    { "", "industry/cargo/oil_big.mdl" },
-    { "", "industry/cargo/oil_sand_big.mdl" },
-    { "", "industry/cargo/oil_sand_small.mdl" },
-    { "", "industry/cargo/oil_small.mdl" },
-    { "", "industry/cargo/planks_big.mdl" },
-    { "", "industry/cargo/planks_small.mdl" },
-    { "", "industry/cargo/plastic_big.mdl" },
-    { "", "industry/cargo/plastic_small.mdl" },
-    { "", "industry/cargo/silver_ore_big.mdl" },
-    { "", "industry/cargo/silver_ore_small.mdl" },
-    { "", "industry/cargo/slag_big.mdl" },
-    { "", "industry/cargo/slag_small.mdl" },
-    { "", "industry/cargo/steel_big.mdl" },
-    { "", "industry/cargo/steel_small.mdl" },
-    { "", "industry/cargo/stone_big.mdl" },
-    { "", "industry/cargo/stone_small.mdl" },
-    { "", "industry/cargo/sugercane_big.mdl" },
-    { "", "industry/cargo/sugercane_small.mdl" },
-    { "", "industry/cargo/tobacco_big.mdl" },
-    { "", "industry/cargo/tobacco_small.mdl" },
-    { "", "industry/cargo/tools_big.mdl" },
-    { "", "industry/cargo/tools_small.mdl" },
+local MODELS = {
+  { "", "industry/cargo/alcohol_big.mdl" },
+  { "", "industry/cargo/alcohol_small.mdl" },
+  { "", "industry/cargo/cargomix1.mdl" },
+  { "", "industry/cargo/cargomix2.mdl" },
+  { "", "industry/cargo/cargomix3.mdl" },
+  { "", "industry/cargo/cargomix4.mdl" },
+  { "", "industry/cargo/coal_big.mdl" },
+  { "", "industry/cargo/coal_small.mdl" },
+  { "", "industry/cargo/coffee_big.mdl" },
+  { "", "industry/cargo/coffee_small.mdl" },
+  { "", "industry/cargo/construction_materials_big.mdl" },
+  { "", "industry/cargo/construction_materials_small.mdl" },
+  { "", "industry/cargo/crude_big.mdl" },
+  { "", "industry/cargo/crude_small.mdl" },
+  { "", "industry/cargo/fish_big.mdl" },
+  { "", "industry/cargo/fish_small.mdl" },
+  { "", "industry/cargo/food_big.mdl" },
+  { "", "industry/cargo/food_small.mdl" },
+  { "", "industry/cargo/fuel_big.mdl" },
+  { "", "industry/cargo/fuel_small.mdl" },
+  { "", "industry/cargo/goods_big.mdl" },
+  { "", "industry/cargo/goods_small.mdl" },
+  { "", "industry/cargo/grain_big.mdl" },
+  { "", "industry/cargo/grain_small.mdl" },
+  { "", "industry/cargo/iron_ore_big.mdl" },
+  { "", "industry/cargo/iron_ore_small.mdl" },
+  { "", "industry/cargo/level/coal_level_2x1.mdl" },
+  { "", "industry/cargo/level/coal_level_4x1.mdl" },
+  { "", "industry/cargo/level/grain_level_2x1.mdl" },
+  { "", "industry/cargo/level/grain_level_4x1.mdl" },
+  { "", "industry/cargo/level/iron_ore_level_2x1.mdl" },
+  { "", "industry/cargo/level/iron_ore_level_4x1.mdl" },
+  { "", "industry/cargo/level/slag_level_2x1.mdl" },
+  { "", "industry/cargo/level/slag_level_4x1.mdl" },
+  { "", "industry/cargo/level/stone_level_2x1.mdl" },
+  { "", "industry/cargo/level/stone_level_4x1.mdl" },
+  { "", "industry/cargo/livestock_big.mdl" },
+  { "", "industry/cargo/livestock_small.mdl" },
+  { "", "industry/cargo/logs_big.mdl" },
+  { "", "industry/cargo/logs_small.mdl" },
+  { "", "industry/cargo/machines_big.mdl" },
+  { "", "industry/cargo/machines_small.mdl" },
+  { "", "industry/cargo/marble_big.mdl" },
+  { "", "industry/cargo/marble_small.mdl" },
+  { "", "industry/cargo/oil_big.mdl" },
+  { "", "industry/cargo/oil_sand_big.mdl" },
+  { "", "industry/cargo/oil_sand_small.mdl" },
+  { "", "industry/cargo/oil_small.mdl" },
+  { "", "industry/cargo/planks_big.mdl" },
+  { "", "industry/cargo/planks_small.mdl" },
+  { "", "industry/cargo/plastic_big.mdl" },
+  { "", "industry/cargo/plastic_small.mdl" },
+  { "", "industry/cargo/silver_ore_big.mdl" },
+  { "", "industry/cargo/silver_ore_small.mdl" },
+  { "", "industry/cargo/slag_big.mdl" },
+  { "", "industry/cargo/slag_small.mdl" },
+  { "", "industry/cargo/steel_big.mdl" },
+  { "", "industry/cargo/steel_small.mdl" },
+  { "", "industry/cargo/stone_big.mdl" },
+  { "", "industry/cargo/stone_small.mdl" },
+  { "", "industry/cargo/sugercane_big.mdl" },
+  { "", "industry/cargo/sugercane_small.mdl" },
+  { "", "industry/cargo/tobacco_big.mdl" },
+  { "", "industry/cargo/tobacco_small.mdl" },
+  { "", "industry/cargo/tools_big.mdl" },
+  { "", "industry/cargo/tools_small.mdl" },
 }
+local CATEGORIES = {"penta_industrial_assets"}
+local SUB_CATEGORY = "Cargo"
+local SUB_CAT_DESCRIPTION = "All vanilla cargo containers"
+
+-- ================================================================== --
 
 function data()
 
-    return {
-        type = "ASSET_DEFAULT",
-        description = {
-            name = "Cargo",
-            description = "All vanilla cargo",
-        },
-        availability = {
-            yearFrom = 1850,
-            yearTo = 0,
-        },
-        buildMode = "MULTI",
-        categories = { "industrial" },
-        order = 100,
-        skipCollision = true,
-        autoRemovable = false,
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
 
-        params = {
-            {
-                key = "asset",
-                name = "Cargo",
-                uiType = "BUTTON", -- "ICON_BUTTON",
-                values = helper.getButtonValues(modelList), -- helper.getIconValues(modelList, 0)
-            },
-            {
-                key = "asset_size",
-                name = "Scale",
-                uiType = "SLIDER",
-                values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
-                defaultIndex = 4,
-                tooltip = "Scales the asset's size.",
-            },
-        },
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
 
-        updateFn = function(params)
-            local result = {}
-            local sizeFactor = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
-
-            -- because lua is one-indexed, but the parameter value is (for some reason) zero-indexed:
-            params.asset = params.asset + 1
-            params.asset_size = params.asset_size + 1
-
-            local size = sizeFactor[params.asset_size]
-            result.models = {}
-
-            result.models = { {
-                id = modelList[params.asset][2], -- Index 2 is the model uri
-                transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
-            } }
-
-            result.terrainAlignmentLists = {
-                { type = "EQUAL", faces = {} }
-            }
-
-            return result
-        end
-    }
-
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
 end

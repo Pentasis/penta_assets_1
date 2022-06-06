@@ -1,98 +1,68 @@
 local helper = require "penta_assets/asset_helper"
 
-local modelList = {
-    { "", "vehicle/car/avant.mdl" },
-    { "", "vehicle/car/beetle_1948.mdl" },
-    { "", "vehicle/car/cadillac_s62_deville.mdl" },
-    { "", "vehicle/car/chevrolet_master_deluxe.mdl" },
-    { "", "vehicle/car/citroen_hp5_typ_c.mdl" },
-    { "", "vehicle/car/coach_01.mdl" },
-    { "", "vehicle/car/coach_02.mdl" },
-    { "", "vehicle/car/coach_03.mdl" },
-    { "", "vehicle/car/coach_04.mdl" },
-    { "", "vehicle/car/coach_05.mdl" },
-    { "", "vehicle/car/coach_06.mdl" },
-    { "", "vehicle/car/corolla.mdl" },
-    { "", "vehicle/car/ford_fordor_1934.mdl" },
-    { "", "vehicle/car/ford_f_series.mdl" },
-    { "", "vehicle/car/ford_model_t.mdl" },
-    { "", "vehicle/car/gaz_22_wolga.mdl" },
-    { "", "vehicle/car/haval_h6.mdl" },
-    { "", "vehicle/car/kim_10_50.mdl" },
-    { "", "vehicle/car/lada_riva_2107.mdl" },
-    { "", "vehicle/car/lincoln_town_car.mdl" },
-    { "", "vehicle/car/nissan_datsun_240z.mdl" },
-    { "", "vehicle/car/opel_kadett_e_carevan.mdl" },
-    { "", "vehicle/car/opel_limo.mdl" },
-    { "", "vehicle/car/pickup_1978.mdl" },
-    { "", "vehicle/car/renault_4_f4_fourgonnette.mdl" },
-    { "", "vehicle/car/subaru_legacy_kombi.mdl" },
-    { "", "vehicle/car/tatra_600.mdl" },
-    { "", "vehicle/car/toyota_mirai.mdl" },
-    { "", "vehicle/car/trabant.mdl" },
-    { "", "vehicle/car/vw_golf_1.mdl" },
-    { "", "vehicle/car/vw_santana.mdl" },
-    { "", "vehicle/car/vw_touran.mdl" },
-    { "", "vehicle/car/vw_type_2_t1.mdl" },
+local MODELS = {
+  { "", "vehicle/car/avant.mdl" },
+  { "", "vehicle/car/beetle_1948.mdl" },
+  { "", "vehicle/car/cadillac_s62_deville.mdl" },
+  { "", "vehicle/car/chevrolet_master_deluxe.mdl" },
+  { "", "vehicle/car/citroen_hp5_typ_c.mdl" },
+  { "", "vehicle/car/coach_01.mdl" },
+  { "", "vehicle/car/coach_02.mdl" },
+  { "", "vehicle/car/coach_03.mdl" },
+  { "", "vehicle/car/coach_04.mdl" },
+  { "", "vehicle/car/coach_05.mdl" },
+  { "", "vehicle/car/coach_06.mdl" },
+  { "", "vehicle/car/corolla.mdl" },
+  { "", "vehicle/car/ford_fordor_1934.mdl" },
+  { "", "vehicle/car/ford_f_series.mdl" },
+  { "", "vehicle/car/ford_model_t.mdl" },
+  { "", "vehicle/car/gaz_22_wolga.mdl" },
+  { "", "vehicle/car/haval_h6.mdl" },
+  { "", "vehicle/car/kim_10_50.mdl" },
+  { "", "vehicle/car/lada_riva_2107.mdl" },
+  { "", "vehicle/car/lincoln_town_car.mdl" },
+  { "", "vehicle/car/nissan_datsun_240z.mdl" },
+  { "", "vehicle/car/opel_kadett_e_carevan.mdl" },
+  { "", "vehicle/car/opel_limo.mdl" },
+  { "", "vehicle/car/pickup_1978.mdl" },
+  { "", "vehicle/car/renault_4_f4_fourgonnette.mdl" },
+  { "", "vehicle/car/subaru_legacy_kombi.mdl" },
+  { "", "vehicle/car/tatra_600.mdl" },
+  { "", "vehicle/car/toyota_mirai.mdl" },
+  { "", "vehicle/car/trabant.mdl" },
+  { "", "vehicle/car/vw_golf_1.mdl" },
+  { "", "vehicle/car/vw_santana.mdl" },
+  { "", "vehicle/car/vw_touran.mdl" },
+  { "", "vehicle/car/vw_type_2_t1.mdl" },
 }
+local CATEGORIES = {"penta_vehicle_assets"}
+local SUB_CATEGORY = "Cars"
+local SUB_CAT_DESCRIPTION = "All vanilla cars"
+
+-- ================================================================== --
 
 function data()
 
-    return {
-        type = "ASSET_DEFAULT",
-        description = {
-            name = "Cars",
-            description = "All vanilla cars",
-        },
-        availability = {
-            yearFrom = 1850,
-            yearTo = 0,
-        },
-        buildMode = "MULTI",
-        categories = { "vehicles" },
-        order = 100,
-        skipCollision = true,
-        autoRemovable = false,
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
 
-        params = {
-            {
-                key = "asset",
-                name = "Cars",
-                uiType = "BUTTON", -- "ICON_BUTTON",
-                values = helper.getButtonValues(modelList), -- helper.getIconValues(modelList, 0)
-            },
-            {
-                key = "asset_size",
-                name = "Scale",
-                uiType = "SLIDER",
-                values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
-                defaultIndex = 4,
-                tooltip = "Scales the asset's size.",
-            },
-        },
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
 
-        updateFn = function(params)
-            local result = {}
-            local sizeFactor = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
-
-            -- because lua is one-indexed, but the parameter value is (for some reason) zero-indexed:
-            params.asset = params.asset + 1
-            params.asset_size = params.asset_size + 1
-
-            local size = sizeFactor[params.asset_size]
-            result.models = {}
-
-            result.models = { {
-                id = modelList[params.asset][2], -- Index 2 is the model uri
-                transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
-            } }
-
-            result.terrainAlignmentLists = {
-                { type = "EQUAL", faces = {} }
-            }
-
-            return result
-        end
-    }
-
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
 end

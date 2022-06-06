@@ -1,22 +1,15 @@
 local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
-  { "Brown Cow", "animal/cow.mdl" },
-  { "Black Cow", "animal/cow_2.mdl" },
-  { "Horse", "animal/horse.mdl" },
-  { "Draft Horse", "animal/draft_horse.mdl" },
-  { "Sheep", "animal/sheep.mdl" },
-  { "Bear", "animal/wildlife_bear.mdl" },
-  { "Dear", "animal/wildlife_deer.mdl" },
-  { "Fox", "animal/wildlife_fox.mdl" },
-  { "Crane", "animal/bird_crane.mdl" },
-  { "Eagle", "animal/bird_eagle.mdl" },
-  { "Seagull", "animal/bird_gull.mdl" },
-  { "Salmon", "animal/fish_salmon.mdl" },
+  { "", "headquarter/headquarter_era_a_01.mdl" },
+  { "", "headquarter/headquarter_era_a_02.mdl" },
+  { "", "headquarter/headquarter_era_b_03.mdl" },
+  { "", "headquarter/headquarter_era_b_04.mdl" },
+  { "", "headquarter/headquarter_era_c_05.mdl" },
 }
-local CATEGORIES = {"penta_nature_assets"}
-local SUB_CATEGORY = "Animals"
-local SUB_CAT_DESCRIPTION = "All vanilla animals"
+local CATEGORIES = {"penta_building_assets"}
+local SUB_CATEGORY = "General Buildings"
+local SUB_CAT_DESCRIPTION = "All vanilla buildings"
 
 -- ================================================================== --
 

@@ -1,130 +1,100 @@
 local helper = require "penta_assets/asset_helper"
 
-local modelList = {
-    { "", "vehicle/waggon/3axes_person.mdl" },
-    { "", "vehicle/waggon/asia/boxcar_as_1850.mdl" },
-    { "", "vehicle/waggon/asia/boxcar_as_1900.mdl" },
-    { "", "vehicle/waggon/asia/boxcar_as_1950.mdl" },
-    { "", "vehicle/waggon/asia/china_type_25.mdl" },
-    { "", "vehicle/waggon/asia/china_type_25c.mdl" },
-    { "", "vehicle/waggon/asia/china_type_yz_22.mdl" },
-    { "", "vehicle/waggon/asia/egorov_20_2.mdl" },
-    { "", "vehicle/waggon/asia/gondola_as_1850.mdl" },
-    { "", "vehicle/waggon/asia/gondola_as_1900.mdl" },
-    { "", "vehicle/waggon/asia/gondola_as_1950.mdl" },
-    { "", "vehicle/waggon/asia/nikolas_1st.mdl" },
-    { "", "vehicle/waggon/asia/putilov_3rd.mdl" },
-    { "", "vehicle/waggon/asia/russo_balt_3rd.mdl" },
-    { "", "vehicle/waggon/asia/stake_car_as_1850.mdl" },
-    { "", "vehicle/waggon/asia/stake_car_as_1900.mdl" },
-    { "", "vehicle/waggon/asia/stake_car_as_1950.mdl" },
-    { "", "vehicle/waggon/asia/suburban_2nd.mdl" },
-    { "", "vehicle/waggon/asia/tankcar_as_1850.mdl" },
-    { "", "vehicle/waggon/asia/tankcar_as_1900.mdl" },
-    { "", "vehicle/waggon/asia/tankcar_as_1950.mdl" },
-    { "", "vehicle/waggon/asia/tvz_61_4447.mdl" },
-    { "", "vehicle/waggon/bc4.mdl" },
-    { "", "vehicle/waggon/boxcar_2000.mdl" },
-    { "", "vehicle/waggon/compartment_car.mdl" },
-    { "", "vehicle/waggon/d1_spanischb.mdl" },
-    { "", "vehicle/waggon/donnerbuechse.mdl" },
-    { "", "vehicle/waggon/ew_ii.mdl" },
-    { "", "vehicle/waggon/ew_iv.mdl" },
-    { "", "vehicle/waggon/gondola_2000.mdl" },
-    { "", "vehicle/waggon/goods_1850_v2.mdl" },
-    { "", "vehicle/waggon/hbi1_v2.mdl" },
-    { "", "vehicle/waggon/kesselwagen_1860.mdl" },
-    { "", "vehicle/waggon/kesselwagen_1910.mdl" },
-    { "", "vehicle/waggon/kesselwagen_1950.mdl" },
-    { "", "vehicle/waggon/open_1850.mdl" },
-    { "", "vehicle/waggon/open_1910.mdl" },
-    { "", "vehicle/waggon/open_1975.mdl" },
-    { "", "vehicle/waggon/rungenwagen_1850.mdl" },
-    { "", "vehicle/waggon/rungenwagen_1890.mdl" },
-    { "", "vehicle/waggon/rungenwagen_1950.mdl" },
-    { "", "vehicle/waggon/stake_car_2000.mdl" },
-    { "", "vehicle/waggon/tankcar_2000.mdl" },
-    { "", "vehicle/waggon/usa/amfleet.mdl" },
-    { "", "vehicle/waggon/usa/bilevel.mdl" },
-    { "", "vehicle/waggon/usa/boxcar_1850.mdl" },
-    { "", "vehicle/waggon/usa/boxcar_1902.mdl" },
-    { "", "vehicle/waggon/usa/boxcar_1945.mdl" },
-    { "", "vehicle/waggon/usa/golden_sand.mdl" },
-    { "", "vehicle/waggon/usa/gondola_1850.mdl" },
-    { "", "vehicle/waggon/usa/gondola_1907.mdl" },
-    { "", "vehicle/waggon/usa/gondola_1955.mdl" },
-    { "", "vehicle/waggon/usa/parlor.mdl" },
-    { "", "vehicle/waggon/usa/pullman_1850.mdl" },
-    { "", "vehicle/waggon/usa/pullman_1876.mdl" },
-    { "", "vehicle/waggon/usa/pullman_1900.mdl" },
-    { "", "vehicle/waggon/usa/stake_car_1850.mdl" },
-    { "", "vehicle/waggon/usa/stake_car_1895.mdl" },
-    { "", "vehicle/waggon/usa/stake_car_1952.mdl" },
-    { "", "vehicle/waggon/usa/streamlined_santa_fe.mdl" },
-    { "", "vehicle/waggon/usa/tankcar_1860.mdl" },
-    { "", "vehicle/waggon/usa/tankcar_1899.mdl" },
-    { "", "vehicle/waggon/usa/tankcar_1948.mdl" },
-    { "", "vehicle/waggon/verbandswagen_v2.mdl" },
-    { "", "vehicle/waggon/wagen_bayrisch_1865.mdl" },
+local MODELS = {
+  { "", "vehicle/waggon/3axes_person.mdl" },
+  { "", "vehicle/waggon/asia/boxcar_as_1850.mdl" },
+  { "", "vehicle/waggon/asia/boxcar_as_1900.mdl" },
+  { "", "vehicle/waggon/asia/boxcar_as_1950.mdl" },
+  { "", "vehicle/waggon/asia/china_type_25.mdl" },
+  { "", "vehicle/waggon/asia/china_type_25c.mdl" },
+  { "", "vehicle/waggon/asia/china_type_yz_22.mdl" },
+  { "", "vehicle/waggon/asia/egorov_20_2.mdl" },
+  { "", "vehicle/waggon/asia/gondola_as_1850.mdl" },
+  { "", "vehicle/waggon/asia/gondola_as_1900.mdl" },
+  { "", "vehicle/waggon/asia/gondola_as_1950.mdl" },
+  { "", "vehicle/waggon/asia/nikolas_1st.mdl" },
+  { "", "vehicle/waggon/asia/putilov_3rd.mdl" },
+  { "", "vehicle/waggon/asia/russo_balt_3rd.mdl" },
+  { "", "vehicle/waggon/asia/stake_car_as_1850.mdl" },
+  { "", "vehicle/waggon/asia/stake_car_as_1900.mdl" },
+  { "", "vehicle/waggon/asia/stake_car_as_1950.mdl" },
+  { "", "vehicle/waggon/asia/suburban_2nd.mdl" },
+  { "", "vehicle/waggon/asia/tankcar_as_1850.mdl" },
+  { "", "vehicle/waggon/asia/tankcar_as_1900.mdl" },
+  { "", "vehicle/waggon/asia/tankcar_as_1950.mdl" },
+  { "", "vehicle/waggon/asia/tvz_61_4447.mdl" },
+  { "", "vehicle/waggon/bc4.mdl" },
+  { "", "vehicle/waggon/boxcar_2000.mdl" },
+  { "", "vehicle/waggon/compartment_car.mdl" },
+  { "", "vehicle/waggon/d1_spanischb.mdl" },
+  { "", "vehicle/waggon/donnerbuechse.mdl" },
+  { "", "vehicle/waggon/ew_ii.mdl" },
+  { "", "vehicle/waggon/ew_iv.mdl" },
+  { "", "vehicle/waggon/gondola_2000.mdl" },
+  { "", "vehicle/waggon/goods_1850_v2.mdl" },
+  { "", "vehicle/waggon/hbi1_v2.mdl" },
+  { "", "vehicle/waggon/kesselwagen_1860.mdl" },
+  { "", "vehicle/waggon/kesselwagen_1910.mdl" },
+  { "", "vehicle/waggon/kesselwagen_1950.mdl" },
+  { "", "vehicle/waggon/open_1850.mdl" },
+  { "", "vehicle/waggon/open_1910.mdl" },
+  { "", "vehicle/waggon/open_1975.mdl" },
+  { "", "vehicle/waggon/rungenwagen_1850.mdl" },
+  { "", "vehicle/waggon/rungenwagen_1890.mdl" },
+  { "", "vehicle/waggon/rungenwagen_1950.mdl" },
+  { "", "vehicle/waggon/stake_car_2000.mdl" },
+  { "", "vehicle/waggon/tankcar_2000.mdl" },
+  { "", "vehicle/waggon/usa/amfleet.mdl" },
+  { "", "vehicle/waggon/usa/bilevel.mdl" },
+  { "", "vehicle/waggon/usa/boxcar_1850.mdl" },
+  { "", "vehicle/waggon/usa/boxcar_1902.mdl" },
+  { "", "vehicle/waggon/usa/boxcar_1945.mdl" },
+  { "", "vehicle/waggon/usa/golden_sand.mdl" },
+  { "", "vehicle/waggon/usa/gondola_1850.mdl" },
+  { "", "vehicle/waggon/usa/gondola_1907.mdl" },
+  { "", "vehicle/waggon/usa/gondola_1955.mdl" },
+  { "", "vehicle/waggon/usa/parlor.mdl" },
+  { "", "vehicle/waggon/usa/pullman_1850.mdl" },
+  { "", "vehicle/waggon/usa/pullman_1876.mdl" },
+  { "", "vehicle/waggon/usa/pullman_1900.mdl" },
+  { "", "vehicle/waggon/usa/stake_car_1850.mdl" },
+  { "", "vehicle/waggon/usa/stake_car_1895.mdl" },
+  { "", "vehicle/waggon/usa/stake_car_1952.mdl" },
+  { "", "vehicle/waggon/usa/streamlined_santa_fe.mdl" },
+  { "", "vehicle/waggon/usa/tankcar_1860.mdl" },
+  { "", "vehicle/waggon/usa/tankcar_1899.mdl" },
+  { "", "vehicle/waggon/usa/tankcar_1948.mdl" },
+  { "", "vehicle/waggon/verbandswagen_v2.mdl" },
+  { "", "vehicle/waggon/wagen_bayrisch_1865.mdl" },
 }
+local CATEGORIES = {"penta_vehicle_assets"}
+local SUB_CATEGORY = "Waggons"
+local SUB_CAT_DESCRIPTION = "All vanilla waggons"
+
+-- ================================================================== --
 
 function data()
 
-    return {
-        type = "ASSET_DEFAULT",
-        description = {
-            name = "Waggons",
-            description = "All vanilla waggons",
-        },
-        availability = {
-            yearFrom = 1850,
-            yearTo = 0,
-        },
-        buildMode = "MULTI",
-        categories = { "vehicles" },
-        order = 100,
-        skipCollision = true,
-        autoRemovable = false,
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
 
-        params = {
-            {
-                key = "asset",
-                name = "Waggons",
-                uiType = "BUTTON", -- "ICON_BUTTON",
-                values = helper.getButtonValues(modelList), -- helper.getIconValues(modelList, 0)
-            },
-            {
-                key = "asset_size",
-                name = "Scale",
-                uiType = "SLIDER",
-                values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
-                defaultIndex = 4,
-                tooltip = "Scales the asset's size.",
-            },
-        },
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
 
-        updateFn = function(params)
-            local result = {}
-            local sizeFactor = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
-
-            -- because lua is one-indexed, but the parameter value is (for some reason) zero-indexed:
-            params.asset = params.asset + 1
-            params.asset_size = params.asset_size + 1
-
-            local size = sizeFactor[params.asset_size]
-            result.models = {}
-
-            result.models = { {
-                id = modelList[params.asset][2], -- Index 2 is the model uri
-                transf = { 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 * size, 0, 0, 0, 0, 1 }
-            } }
-
-            result.terrainAlignmentLists = {
-                { type = "EQUAL", faces = {} }
-            }
-
-            return result
-        end
-    }
-
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
 end

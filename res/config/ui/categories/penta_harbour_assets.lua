@@ -1,6 +1,6 @@
 function data()
     return {
         name = _("Harbour"),
-        order = 2,
+        order = 5022,
     }
 end

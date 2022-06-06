@@ -1,0 +1,60 @@
+local helper = require "penta_assets/asset_helper"
+
+local MODELS = {
+  { "", "asset/commercial/all_eras/era_a_com_wall.mdl" },
+  { "", "asset/commercial/all_eras/era_b_com_wall.mdl" },
+  { "", "asset/commercial/all_eras/era_c_com_wall.mdl" },
+  { "", "asset/fence_wood.mdl" },
+  { "", "asset/railing_new.mdl" },
+  { "", "asset/railing_new_start.mdl" },
+  { "", "asset/vegetation/hedge_3m.mdl" },
+  { "", "asset/vegetation/hedge_m.mdl" },
+  { "", "asset/track_multi_sound_insulation_10m.mdl" },
+  { "", "asset/track_multi_sound_insulation_20m.mdl" },
+  { "", "asset/track_multi_sound_insulation_60m.mdl" },
+  { "", "industry/fuel_refinery/era_a/fr_fence_wall.mdl" },
+  { "", "industry/goods_factory/era_a/fence_corner.mdl" },
+  { "", "industry/goods_factory/era_a/fence_doorway.mdl" },
+  { "", "industry/goods_factory/era_a/fence_pillar.mdl" },
+  { "", "industry/goods_factory/era_a/fence_straight_2.mdl" },
+  { "", "industry/goods_factory/era_a/fence_straight_8.mdl" },
+  { "", "industry/goods_factory/fence_back.mdl" },
+  { "", "industry/goods_factory/fence_corner.mdl" },
+  { "", "industry/goods_factory/fence_front.mdl" },
+  { "", "industry/goods_factory/fence_short.mdl" },
+  { "", "industry/machines_factory/era_a/brick_wall.mdl" },
+  { "", "industry/machines_factory/era_a/brick_wall_pillar.mdl" },
+  { "", "industry/oil_refinery/era_a/oil_refinery_wall_large.mdl" },
+  { "", "industry/oil_refinery/era_a/oil_refinery_wall_small.mdl" },
+}
+local CATEGORIES = {"penta_wall_assets"}
+local SUB_CATEGORY = "Wall & Fences"
+local SUB_CAT_DESCRIPTION = "All vanilla walls and fences"
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
+end

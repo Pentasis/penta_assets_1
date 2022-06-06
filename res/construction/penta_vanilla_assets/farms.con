@@ -1,0 +1,50 @@
+local helper = require "penta_assets/asset_helper"
+
+local MODELS = {
+  { "", "industry/farm/barn_large.mdl" },
+  { "", "industry/farm/barn_open.mdl" },
+  { "", "industry/farm/barn_small.mdl" },
+  { "", "industry/farm/cesspit.mdl" },
+  { "", "industry/farm/cow_barn.mdl" },
+  { "", "industry/farm/cow_barn_cort.mdl" },
+  { "", "industry/farm/fence.mdl" },
+  { "", "industry/farm/hay_cube.mdl" },
+  { "", "industry/farm/hay_flat.mdl" },
+  { "", "industry/farm/hay_flat_2.mdl" },
+  { "", "industry/farm/hay_pile.mdl" },
+  { "", "industry/farm/hay_pile_2.mdl" },
+  { "", "industry/farm/hay_round.mdl" },
+  { "", "industry/farm/silo.mdl" },
+  { "", "industry/farm/well.mdl" },
+}
+local CATEGORIES = {"penta_rural_assets"}
+local SUB_CATEGORY = "Farms"
+local SUB_CAT_DESCRIPTION = "All vanilla farm buildings"
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
+end

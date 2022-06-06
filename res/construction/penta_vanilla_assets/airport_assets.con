@@ -1,0 +1,111 @@
+local helper = require "penta_assets/asset_helper"
+
+local MODELS = {
+  { "", "station/air/asset/approach_light_papi_c.mdl" },
+  { "", "station/air/asset/approach_light_rabbit_c.mdl" },
+  { "", "station/air/asset/approach_light_white_b.mdl" },
+  { "", "station/air/asset/blastfence_red.mdl" },
+  { "", "station/air/asset/blastfence_white.mdl" },
+  { "", "station/air/asset/cargo_package_a.mdl" },
+  { "", "station/air/asset/cart_baggage_b.mdl" },
+  { "", "station/air/asset/cart_cargo_b.mdl" },
+  { "", "station/air/asset/center_light_runway_c.mdl" },
+  { "", "station/air/asset/center_light_taxiway_c.mdl" },
+  { "", "station/air/asset/edge_light_runway_a.mdl" },
+  { "", "station/air/asset/edge_light_runway_b.mdl" },
+  { "", "station/air/asset/edge_light_runway_c.mdl" },
+  { "", "station/air/asset/edge_light_taxiway_b.mdl" },
+  { "", "station/air/asset/edge_light_taxiway_c.mdl" },
+  { "", "station/air/asset/end_light_green_b.mdl" },
+  { "", "station/air/asset/end_light_green_c_large.mdl" },
+  { "", "station/air/asset/end_light_green_c_small.mdl" },
+  { "", "station/air/asset/end_light_red_b.mdl" },
+  { "", "station/air/asset/end_light_red_c_large.mdl" },
+  { "", "station/air/asset/end_light_red_c_small.mdl" },
+  { "", "station/air/asset/fence_metal.mdl" },
+  { "", "station/air/asset/fence_wood.mdl" },
+  { "", "station/air/asset/flood_light_airfield_c.mdl" },
+  { "", "station/air/asset/handcart_luggage_a.mdl" },
+  { "", "station/air/asset/handrail_3m.mdl" },
+  { "", "station/air/asset/handrail_6m.mdl" },
+  { "", "station/air/asset/invisible.mdl" },
+  { "", "station/air/asset/ladder_high_a.mdl" },
+  { "", "station/air/asset/ladder_low_a.mdl" },
+  { "", "station/air/asset/luggage_01_a.mdl" },
+  { "", "station/air/asset/luggage_01_b.mdl" },
+  { "", "station/air/asset/luggage_02_a.mdl" },
+  { "", "station/air/asset/luggage_02_b.mdl" },
+  { "", "station/air/asset/luggage_03_a.mdl" },
+  { "", "station/air/asset/luggage_03_b.mdl" },
+  { "", "station/air/asset/luggage_boxed_wagon.mdl" },
+  { "", "station/air/asset/luggage_cart.mdl" },
+  { "", "station/air/asset/luggage_wagon.mdl" },
+  { "", "station/air/asset/pylon_b.mdl" },
+  { "", "station/air/asset/pylon_c.mdl" },
+  { "", "station/air/asset/radar.mdl" },
+  { "", "station/air/asset/signal_runway_modern.mdl" },
+  { "", "station/air/asset/signal_runway_old.mdl" },
+  { "", "station/air/asset/signal_taxi_modern.mdl" },
+  { "", "station/air/asset/signal_taxi_old.mdl" },
+  { "", "station/air/asset/sign_27.mdl" },
+  { "", "station/air/asset/sign_27_left.mdl" },
+  { "", "station/air/asset/sign_27_right.mdl" },
+  { "", "station/air/asset/sign_27_straight.mdl" },
+  { "", "station/air/asset/sign_9.mdl" },
+  { "", "station/air/asset/sign_9_left.mdl" },
+  { "", "station/air/asset/sign_9_right.mdl" },
+  { "", "station/air/asset/sign_9_straight.mdl" },
+  { "", "station/air/asset/sign_a.mdl" },
+  { "", "station/air/asset/sign_a_left.mdl" },
+  { "", "station/air/asset/sign_a_right.mdl" },
+  { "", "station/air/asset/sign_a_right_b_left.mdl" },
+  { "", "station/air/asset/sign_a_straight.mdl" },
+  { "", "station/air/asset/sign_b.mdl" },
+  { "", "station/air/asset/sign_b_left.mdl" },
+  { "", "station/air/asset/sign_b_right.mdl" },
+  { "", "station/air/asset/sign_b_right_a_left.mdl" },
+  { "", "station/air/asset/sign_b_straight.mdl" },
+  { "", "station/air/asset/sign_prohibiton.mdl" },
+  { "", "station/air/asset/spotlight_new.mdl" },
+  { "", "station/air/asset/spotlight_old.mdl" },
+  { "", "station/air/asset/stairs_car.mdl" },
+  { "", "station/air/asset/stairs_high_a.mdl" },
+  { "", "station/air/asset/stairs_low_a.mdl" },
+  { "", "station/air/asset/stairs_manual.mdl" },
+  { "", "station/air/asset/tower_spotlight_a.mdl" },
+  { "", "station/air/asset/trailer_cargo_a.mdl" },
+  { "", "station/air/asset/tug_clarktor_a.mdl" },
+  { "", "station/air/asset/tug_clark_ck30_b.mdl" },
+  { "", "station/air/asset/windsock.mdl" },
+}
+local CATEGORIES = {"penta_airport_assets"}
+local SUB_CATEGORY = "Airport assets"
+local SUB_CAT_DESCRIPTION = "All vanilla airport assets"
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
+end

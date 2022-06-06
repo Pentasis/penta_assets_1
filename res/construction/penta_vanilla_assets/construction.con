@@ -1,0 +1,65 @@
+local helper = require "penta_assets/asset_helper"
+
+local MODELS = {
+  { "", "asset/construction/crane/era_b_mast.mdl" },
+  { "", "asset/construction/crane/era_b_slewing_platform.mdl" },
+  { "", "asset/construction/crane/era_b_slewing_ring_support.mdl" },
+  { "", "asset/construction/crane/era_b_tie_in.mdl" },
+  { "", "asset/construction/crane/era_b_undercarriage.mdl" },
+  { "", "asset/construction/scaffolding/era_a_asia_normal.mdl" },
+  { "", "asset/construction/scaffolding/era_a_ladder.mdl" },
+  { "", "asset/construction/scaffolding/era_a_normal.mdl" },
+  { "", "asset/construction/scaffolding/era_b_ladder.mdl" },
+  { "", "asset/construction/scaffolding/era_b_normal.mdl" },
+  { "", "asset/construction_1850.mdl" },
+  { "", "asset/construction_1900.mdl" },
+  { "", "asset/construction_1950.mdl" },
+  { "", "asset/ground/construction_shack.mdl" },
+  { "", "asset/ground/construction_tent.mdl" },
+  { "", "asset/ground/dam.mdl" },
+  { "", "asset/ground/dynamite.mdl" },
+  { "", "asset/ground/heaps.mdl" },
+  { "", "asset/ground/heap_big.mdl" },
+  { "", "asset/ground/heap_mid.mdl" },
+  { "", "asset/ground/heap_small.mdl" },
+  { "", "asset/ground/industry.mdl" },
+  { "", "asset/ground/metal_beam_01.mdl" },
+  { "", "asset/ground/pallet_01.mdl" },
+  { "", "asset/ground/rail_ending_marker.mdl" },
+  { "", "asset/industry/steal_pipes_01.mdl" },
+  { "", "asset/industry/wooden_shed_01.mdl" },
+  { "", "asset/industry/wooden_shed_02.mdl" },
+  { "", "asset/industry/wood_plates_01.mdl" },
+  { "", "asset/industry/wood_plates_02.mdl" },
+}
+local CATEGORIES = {"penta_construction_assets"}
+local SUB_CATEGORY = "Construction"
+local SUB_CAT_DESCRIPTION = "All vanilla construction assets"
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
+end

@@ -1,0 +1,79 @@
+local helper = require "penta_assets/asset_helper"
+
+local MODELS = {
+  { "", "asset/ampel.mdl" },
+  { "", "asset/antenna_01.mdl" },
+  { "", "asset/antenna_02.mdl" },
+  { "", "asset/barrel_water_blue.mdl" },
+  { "", "asset/barrel_water_wood.mdl" },
+  { "", "asset/cable_isolator.mdl" },
+  { "", "asset/cable_junction.mdl" },
+  { "", "asset/clock_wall_old.mdl" },
+  { "", "asset/commercial/era_a/com_1_asset_restaurant_menu_01_a.mdl" },
+  { "", "asset/commercial/era_a/com_1_asset_restaurant_menu_01_b.mdl" },
+  { "", "asset/commercial/era_a/era_a_com_barn_open.mdl" },
+  { "", "asset/commercial/era_a/waggonwheel_01.mdl" },
+  { "", "asset/commercial/era_a/waggonwheel_02.mdl" },
+  { "", "asset/commercial/era_a/waggon_01.mdl" },
+  { "", "asset/commercial/era_a/waggon_02.mdl" },
+  { "", "asset/commercial/era_a/waggon_03.mdl" },
+  { "", "asset/commercial/era_b/pillar.mdl" },
+  { "", "asset/commercial/era_b/wall_grip.mdl" },
+  { "", "asset/commercial/era_c/com_pillar.mdl" },
+  { "", "asset/ground/rocket_engine.mdl" },
+  { "", "asset/ground/rocket_engine_tank.mdl" },
+  { "", "asset/ground/rocket_parts.mdl" },
+  { "", "asset/ground/rocket_ring.mdl" },
+  { "", "asset/ground/rocket_satelite.mdl" },
+  { "", "asset/ground/rocket_tank.mdl" },
+  { "", "asset/ground/campfire.mdl" },
+  { "", "asset/ground/campfire_smoke.mdl" },
+  { "", "asset/ground/horse.mdl" },
+  { "", "asset/ground/gold_nugget.mdl" },
+  { "", "asset/satelite_01.mdl" },
+  { "", "building/era_b/com_2_to_3_assets.mdl" },
+  { "", "building/era_c/com_2_to_4_assets.mdl" },
+  { "", "street/street_asset_mix/fireplug_eu_a.mdl" },
+  { "", "street/street_asset_mix/fireplug_eu_c.mdl" },
+  { "", "street/street_asset_mix/fireplug_us_a.mdl" },
+  { "", "street/street_asset_mix/fireplug_us_c.mdl" },
+  { "", "street/street_asset_mix/mailbox_eu_a.mdl" },
+  { "", "street/street_asset_mix/mailbox_eu_c.mdl" },
+  { "", "street/street_asset_mix/mailbox_us_a.mdl" },
+  { "", "street/street_asset_mix/mailbox_us_c.mdl" },
+  { "", "street/street_asset_mix/trash_standing_a.mdl" },
+  { "", "street/street_asset_mix/trash_standing_c.mdl" },
+  { "", "asset/tree_bed_new.mdl" },
+  { "", "asset/tree_bed_old.mdl" },
+}
+local CATEGORIES = {"penta_clutter_assets"}
+local SUB_CATEGORY = "Misc"
+local SUB_CAT_DESCRIPTION = "Everything else not categorised (yet)"
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
+end

@@ -1,0 +1,85 @@
+local helper = require "penta_assets/asset_helper"
+
+local MODELS = {
+  { "", "industry/coal_mine/era_a/coal_mine_entrance.mdl" },
+  { "", "industry/coal_mine/era_a/coal_mine_l.mdl" },
+  { "", "industry/coal_mine/era_a/coal_mine_modern_l.mdl" },
+  { "", "industry/coal_mine/era_a/coal_mine_modern_r.mdl" },
+  { "", "industry/coal_mine/era_a/coal_mine_r.mdl" },
+  { "", "industry/coal_mine/era_a/transfer_building_large.mdl" },
+  { "", "industry/coal_mine/era_a/transfer_building_small.mdl" },
+  { "", "industry/coal_mine/new_big.mdl" },
+  { "", "industry/coal_mine/new_small.mdl" },
+  { "", "industry/coal_mine/old_left.mdl" },
+  { "", "industry/coal_mine/old_right.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_main_building.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_ramp_large.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_ramp_small.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_side_building.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_stone_crusher_1.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_stone_crusher_2.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_stone_crusher_3.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_street_markings.mdl" },
+  { "", "industry/iron_ore_mine/era_a/iom_warehouse_1.mdl" },
+  { "", "industry/iron_ore_mine/excavator.mdl" },
+  { "", "industry/iron_ore_mine/main_building.mdl" },
+  { "", "industry/iron_ore_mine/side_building.mdl" },
+  { "", "industry/iron_ore_mine/warehouse.mdl" },
+  { "", "industry/quarry/crusher_connector.mdl" },
+  { "", "industry/quarry/crusher_left.mdl" },
+  { "", "industry/quarry/crusher_right.mdl" },
+  { "", "industry/quarry/era_a/building_1.mdl" },
+  { "", "industry/quarry/era_a/building_2.mdl" },
+  { "", "industry/quarry/era_a/ramp_large.mdl" },
+  { "", "industry/quarry/era_a/ramp_small.mdl" },
+  { "", "industry/quarry/era_a/stone_crusher_1.mdl" },
+  { "", "industry/quarry/era_a/stone_crusher_2.mdl" },
+  { "", "industry/quarry/era_a/stone_crusher_3.mdl" },
+  { "", "industry/quarry/quarry_new.mdl" },
+  { "", "industry/quarry/quarry_old.mdl" },
+  { "", "industry/quarry/stones.mdl" },
+  { "", "industry/assets/era_a/excavator_era_a.mdl" },
+  { "", "industry/assets/era_a/mining_track_cart.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_45_l.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_45_l_anim.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_45_r.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_45_r_anim.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_90_l.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_90_l_anim.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_90_r.mdl" },
+  { "", "industry/assets/era_a/mining_track_curve_90_r_anim.mdl" },
+  { "", "industry/assets/era_a/mining_track_straight.mdl" },
+  { "", "industry/assets/era_a/mining_track_straight_anim.mdl" },
+
+}
+local CATEGORIES = {"penta_industrial_assets"}
+local SUB_CATEGORY = "Industry"
+local SUB_CAT_DESCRIPTION = "All vanilla mining assets"
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = SUB_CATEGORY,
+      description = SUB_CAT_DESCRIPTION,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = CATEGORIES,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnGeneral(MODELS, params)
+    end
+  }
+end
