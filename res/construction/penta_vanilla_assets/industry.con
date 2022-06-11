@@ -96,9 +96,15 @@ local MODELS = {
   { name = "", uri = "industry/tools_factory/era_a/warehouse_flat_rep.mdl" },
   { name = "", uri = "industry/tools_factory/era_a/warehouse_flat_top_end.mdl" },
 }
-local CATEGORIES = {"penta_industrial_assets"}
-local SUB_CATEGORY = "Industry"
-local SUB_CAT_DESCRIPTION = "All vanilla industry buildings"
+local ASSET_CONFIG = {
+  category = { "penta_industrial_assets" },
+  sub_category = "Industry",
+  description = "Industrial buildings (non-town)",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
 
 -- ================================================================== --
 
@@ -107,23 +113,23 @@ function data()
   return {
     type = "ASSET_DEFAULT",
     description = {
-      name = SUB_CATEGORY,
-      description = SUB_CAT_DESCRIPTION,
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
     },
     availability = {
       yearFrom = 1850,
       yearTo = 0,
     },
     buildMode = "MULTI",
-    categories = CATEGORIES,
+    categories = ASSET_CONFIG.category,
     order = 100,
     skipCollision = true,
     autoRemovable = false,
 
-    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
 
     updateFn = function(params)
-      return helper.updateFnGeneral(MODELS, params)
+      return helper.updateFnAsset(MODELS, params)
     end
   }
 end

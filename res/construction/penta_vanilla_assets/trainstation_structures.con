@@ -4,9 +4,15 @@ local MODELS = {
   { name = "", uri = "depot/rail/train_depot_era_a.mdl" },
 
 }
-local CATEGORIES = {"penta_rail_assets"}
-local SUB_CATEGORY = "Train station Structures"
-local SUB_CAT_DESCRIPTION = "All vanilla train station structures"
+local ASSET_CONFIG = {
+  category = { "penta_rail_assets" },
+  sub_category = "Train station Structures",
+  description = "Train station Structures",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
 
 -- ================================================================== --
 
@@ -15,23 +21,23 @@ function data()
   return {
     type = "ASSET_DEFAULT",
     description = {
-      name = SUB_CATEGORY,
-      description = SUB_CAT_DESCRIPTION,
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
     },
     availability = {
       yearFrom = 1850,
       yearTo = 0,
     },
     buildMode = "MULTI",
-    categories = CATEGORIES,
+    categories = ASSET_CONFIG.category,
     order = 100,
     skipCollision = true,
     autoRemovable = false,
 
-    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
 
     updateFn = function(params)
-      return helper.updateFnGeneral(MODELS, params)
+      return helper.updateFnAsset(MODELS, params)
     end
   }
 end

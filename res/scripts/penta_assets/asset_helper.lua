@@ -4,22 +4,8 @@ local asset_helper = {}
 
 local SCALE_FACTORS = { 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2 }
 local CIM_CAPACITY = { 1, 2, 3, 4, 5, 10, 25, 50, 100 }
-local HAVE_HEIGHT_PARAM = { "Trains", "Waggons" }
-local HAVE_CIM_CAPACITY = { "Houses", "Shops", "Factories" }
 
 -- ================================================================== --
-
-local function hasValue(table, search_term)
-  for index, value in ipairs(table) do
-    if value == search_term then
-      return true
-    end
-  end
-
-  return false
-end
-
--- ------------------------------------------------------------------ --
 
 local function sanitizeString(subcategory)
   subcategory = string.gsub(subcategory, " ", "_")
@@ -69,43 +55,73 @@ end
 
 -- ================================================================== --
 
-function asset_helper.generateBaseParameters(subcategory, models)
+function asset_helper.generateAssetParameters(asset_config, models)
 
-  local icon_url = "ui/construction/icon_buttons/" .. sanitizeString(subcategory) .. "/"
+  local icon_url = "ui/construction/icon_buttons/" .. sanitizeString(asset_config.sub_category) .. "/"
+  local params
 
-  local params = {
-    {
-      key = "assets",
-      name = subcategory,
-      uiType = "ICON_BUTTON",
-      values = getButtonsIcons(models, icon_url), -- getButtonsText(models)
-      defaultIndex = 0,
-    },
-    {
-      key = "asset_scales",
-      name = "Scale",
+  -- Buttons or Icons
+  if asset_config.has_icon_button then
+    params = {
+      {
+        key = "assets",
+        name = asset_config.sub_category,
+        uiType = "ICON_BUTTON",
+        values = getButtonsIcons(models, icon_url),
+        defaultIndex = 0,
+      }
+    }
+  else
+    params = {
+      {
+        key = "assets",
+        name = asset_config.sub_category,
+        uiType = "BUTTON",
+        values = getButtonsText(models),
+        defaultIndex = 0,
+      }
+    }
+  end
+
+  -- Scale
+  if asset_config.has_seperated_scales then
+    params[#params + 1] = {
+      key = "asset_x_scales",
+      name = "Length scale",
       uiType = "SLIDER",
       values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
       defaultIndex = 4,
-      tooltip = "Scales the asset's size.",
-    },
-    {
-      key = "terrain_alignment",
-      name = _("Terrain alignment"),
-      uiType = "CHECKBOX",
-      values = { "0", "1" },
-      defaultIndex = 0,
-    },
-    {
-      key = "slope_msg",
-      name = _("Slope & Pivot can be changed with O,P,[ and ] keys."),
-      uiType = "BUTTON",
-      values = { "(Hold shift for smaller steps)" },
-      defaultIndex = 0,
-    } -- TODO: make this a visual guide (ICON_BUTTON) and move to lowest position
-  }
+      tooltip = "Asset length scale.",
+    }
+    params[#params + 1] = {
+      key = "asset_y_scales",
+      name = "Width scale",
+      uiType = "SLIDER",
+      values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
+      defaultIndex = 4,
+      tooltip = "Asset width scale.",
+    }
+    params[#params + 1] = {
+      key = "asset_z_scales",
+      name = "Height scale",
+      uiType = "SLIDER",
+      values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
+      defaultIndex = 4,
+      tooltip = "Asset height scale.",
+    }
+  else
+    params[#params + 1] = {
+        key = "asset_scales",
+        name = "Scale",
+        uiType = "SLIDER",
+        values = { "0.10x", "0.25x", "0.5x", "0.75x", "1.0x", "1.5x", "2.0x" },
+        defaultIndex = 4,
+        tooltip = "Scales the asset's size.",
+    }
+  end
 
-  if hasValue(HAVE_HEIGHT_PARAM, subcategory) then
+  -- Track height
+  if asset_config.has_track_height then
     params[#params + 1] = {
       key = "asset_height",
       name = _("Height"),
@@ -115,7 +131,8 @@ function asset_helper.generateBaseParameters(subcategory, models)
     }
   end
 
-  if hasValue(HAVE_CIM_CAPACITY, subcategory) then
+  -- Capacity
+  if asset_config.has_magnet then
     params[#params + 1] = {
       key = "asset_cim_magnet",
       name = _("Magnet"),
@@ -132,22 +149,43 @@ function asset_helper.generateBaseParameters(subcategory, models)
     }
   end
 
+  -- Terrain
+  params[#params + 1] = {
+      key = "terrain_alignment",
+      name = _("Terrain alignment"),
+      uiType = "CHECKBOX",
+      values = { "0", "1" },
+      defaultIndex = 0,
+  }
+
+  -- O, P, [ , ]
+  -- TODO: add image with description as ICON_BUTTON
+
   return params
 end
 
 -- ------------------------------------------------------------------ --
 
-function asset_helper.updateFnGeneral(models, params)
+function asset_helper.updateFnAsset(models, params)
   -- because lua is one-indexed, but the parameter value is zero-indexed:
   local selected_model_index = params.assets + 1
-  local selected_scale_index = params.asset_scales + 1
 
-  local selected_scale = SCALE_FACTORS[selected_scale_index]
+  local selected_x_scale
+  local selected_y_scale
+  local selected_z_scale
+  if params.asset_scales then
+    selected_x_scale = SCALE_FACTORS[params.asset_scales + 1]
+    selected_y_scale = selected_x_scale
+    selected_z_scale = selected_x_scale
+  else
+    selected_x_scale = SCALE_FACTORS[params.asset_x_scales + 1]
+    selected_y_scale = SCALE_FACTORS[params.asset_y_scales + 1]
+    selected_z_scale = SCALE_FACTORS[params.asset_z_scales + 1]
+  end
+
   local selected_height = 0
-
-  -- 1.05 is the default height of (vanilla) tracks
   if params.asset_height and params.asset_height == 1 then
-    selected_height = 1.05
+    selected_height = 1.05  -- 1.05 is the default height of (vanilla) tracks
   end
 
   local result = {}
@@ -167,9 +205,9 @@ function asset_helper.updateFnGeneral(models, params)
   result.models = {
     {
       id = models[selected_model_index].uri,
-      transf = constructionutil.rotateTransf(params, { selected_scale, 0, 0, 0,
-                                                       0, selected_scale, 0, 0,
-                                                       0, 0, selected_scale, 0,
+      transf = constructionutil.rotateTransf(params, { selected_x_scale, 0, 0, 0,
+                                                       0, selected_y_scale, 0, 0,
+                                                       0, 0, selected_z_scale, 0,
                                                        0, 0, selected_height, 1 })
     }
   }

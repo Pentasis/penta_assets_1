@@ -55,9 +55,15 @@ local MODELS = {
   { name = "", uri = "building/era_b/com_1_asset_ground_food_booth_01.mdl" },
   { name = "", uri = "building/era_b/com_1_asset_ground_food_booth_02.mdl" },
 }
-local CATEGORIES = {"penta_commercial_assets"}
-local SUB_CATEGORY = "Market"
-local SUB_CAT_DESCRIPTION = "All vanilla market & kiosks"
+local ASSET_CONFIG = {
+  category = { "penta_commercial_assets" },
+  sub_category = "Market",
+  description = "Market & kiosks",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
 
 -- ================================================================== --
 
@@ -66,23 +72,23 @@ function data()
   return {
     type = "ASSET_DEFAULT",
     description = {
-      name = SUB_CATEGORY,
-      description = SUB_CAT_DESCRIPTION,
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
     },
     availability = {
       yearFrom = 1850,
       yearTo = 0,
     },
     buildMode = "MULTI",
-    categories = CATEGORIES,
+    categories = ASSET_CONFIG.category,
     order = 100,
     skipCollision = true,
     autoRemovable = false,
 
-    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
 
     updateFn = function(params)
-      return helper.updateFnGeneral(MODELS, params)
+      return helper.updateFnAsset(MODELS, params)
     end
   }
 end

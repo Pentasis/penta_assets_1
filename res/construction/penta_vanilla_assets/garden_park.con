@@ -49,9 +49,15 @@ local MODELS = {
   { name = "", uri = "asset/park_fountain_1.mdl" },
   { name = "", uri = "asset/park_kiosk_1.mdl" },
 }
-local CATEGORIES = {"penta_residential_assets"}
-local SUB_CATEGORY = "Gardens & Parks"
-local SUB_CAT_DESCRIPTION = "All vanilla garden and park assets"
+local ASSET_CONFIG = {
+  category = { "penta_residential_assets" },
+  sub_category = "Gardens & Parks",
+  description = "Garden and park assets",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
 
 -- ================================================================== --
 
@@ -60,23 +66,23 @@ function data()
   return {
     type = "ASSET_DEFAULT",
     description = {
-      name = SUB_CATEGORY,
-      description = SUB_CAT_DESCRIPTION,
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
     },
     availability = {
       yearFrom = 1850,
       yearTo = 0,
     },
     buildMode = "MULTI",
-    categories = CATEGORIES,
+    categories = ASSET_CONFIG.category,
     order = 100,
     skipCollision = true,
     autoRemovable = false,
 
-    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
 
     updateFn = function(params)
-      return helper.updateFnGeneral(MODELS, params)
+      return helper.updateFnAsset(MODELS, params)
     end
   }
 end

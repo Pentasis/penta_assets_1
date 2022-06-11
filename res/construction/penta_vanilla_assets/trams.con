@@ -29,9 +29,15 @@ local MODELS = {
   { name = "", uri = "vehicle/tram/usa/strassenbahn1850_usa.mdl" },
   { name = "", uri = "vehicle/tram/usa/toronto_clrv.mdl" },
 }
-local CATEGORIES = {"penta_vehicle_assets"}
-local SUB_CATEGORY = "Trams"
-local SUB_CAT_DESCRIPTION = "All vanilla trams"
+local ASSET_CONFIG = {
+  category = { "penta_vehicle_assets" },
+  sub_category = "Trams",
+  description = "Trams",
+  has_icon_button = true,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
 
 -- ================================================================== --
 
@@ -40,23 +46,23 @@ function data()
   return {
     type = "ASSET_DEFAULT",
     description = {
-      name = SUB_CATEGORY,
-      description = SUB_CAT_DESCRIPTION,
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
     },
     availability = {
       yearFrom = 1850,
       yearTo = 0,
     },
     buildMode = "MULTI",
-    categories = CATEGORIES,
+    categories = ASSET_CONFIG.category,
     order = 100,
     skipCollision = true,
     autoRemovable = false,
 
-    params = helper.generateBaseParameters(SUB_CATEGORY, MODELS),
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
 
     updateFn = function(params)
-      return helper.updateFnGeneral(MODELS, params)
+      return helper.updateFnAsset(MODELS, params)
     end
   }
 end
