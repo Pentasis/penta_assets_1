@@ -2,27 +2,15 @@ local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
   { name = "", uri = "industry/farm/barn_large.mdl" },
-  { name = "", uri = "industry/farm/barn_open.mdl" },
   { name = "", uri = "industry/farm/barn_small.mdl" },
-  { name = "", uri = "industry/farm/cesspit.mdl" },
   { name = "", uri = "industry/farm/cow_barn.mdl" },
-  { name = "", uri = "industry/farm/cow_barn_cort.mdl" },
-  { name = "", uri = "industry/farm/fence.mdl" },
-  { name = "", uri = "industry/farm/hay_cube.mdl" },
-  { name = "", uri = "industry/farm/hay_flat.mdl" },
-  { name = "", uri = "industry/farm/hay_flat_2.mdl" },
-  { name = "", uri = "industry/farm/hay_pile.mdl" },
-  { name = "", uri = "industry/farm/hay_pile_2.mdl" },
-  { name = "", uri = "industry/farm/hay_round.mdl" },
-  { name = "", uri = "industry/farm/silo.mdl" },
-  { name = "", uri = "industry/farm/well.mdl" },
 }
 local ASSET_CONFIG = {
   category = { "penta_rural_assets" },
-  sub_category = "Farms",
-  description = "Farm buildings and assets",
+  sub_category = "Farm buildings",
+  description = "Farm building",
   has_icon_button = false,
-  has_magnet = false,
+  has_magnet = true,
   has_track_height = false,
   has_seperated_scales = false
 }

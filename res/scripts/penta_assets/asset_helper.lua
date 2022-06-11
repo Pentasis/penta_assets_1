@@ -34,7 +34,7 @@ local function getButtonsText(models)
     if model.name ~= "" then
       buttons_texts[index] = model.name
     else
-      buttons_texts[index] = getFileName(model.uri)
+      buttons_texts[index] = tostring(index + 3) .. ": " .. getFileName(model.uri)
     end
   end
 
