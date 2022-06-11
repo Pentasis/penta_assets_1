@@ -1,20 +1,20 @@
 local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
-  { "", "depot/road/road_depot_era_a.mdl" },
-  { "", "station/road/streetstation/streetstation_sidebuilding_cargo_s1.mdl" },
-  { "", "station/road/streetstation/streetstation_sidebuilding_cargo_s2.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_a_cargo_s1.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_a_cargo_s2.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_a_s1.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_a_s2.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_b_s1.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_b_s2.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_c_s1.mdl" },
-  { "", "station/road/streetstation_sidebuilding_era_c_s2.mdl" },
-  { "", "station/road/cargo_large_old.mdl" },
-  { "", "station/road/cargo_medium_old.mdl" },
-  { "", "station/road/small_cargo.mdl" },
+  { name = "", uri = "depot/road/road_depot_era_a.mdl" },
+  { name = "", uri = "station/road/streetstation/streetstation_sidebuilding_cargo_s1.mdl" },
+  { name = "", uri = "station/road/streetstation/streetstation_sidebuilding_cargo_s2.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_a_cargo_s1.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_a_cargo_s2.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_a_s1.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_a_s2.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_b_s1.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_b_s2.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_c_s1.mdl" },
+  { name = "", uri = "station/road/streetstation_sidebuilding_era_c_s2.mdl" },
+  { name = "", uri = "station/road/cargo_large_old.mdl" },
+  { name = "", uri = "station/road/cargo_medium_old.mdl" },
+  { name = "", uri = "station/road/small_cargo.mdl" },
 }
 local CATEGORIES = {"penta_road_assets"}
 local SUB_CATEGORY = "Truck station Structures"

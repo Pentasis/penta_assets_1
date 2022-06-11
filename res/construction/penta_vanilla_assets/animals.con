@@ -1,18 +1,18 @@
 local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
-  { "Brown Cow", "animal/cow.mdl" },
-  { "Black Cow", "animal/cow_2.mdl" },
-  { "Horse", "animal/horse.mdl" },
-  { "Draft Horse", "animal/draft_horse.mdl" },
-  { "Sheep", "animal/sheep.mdl" },
-  { "Bear", "animal/wildlife_bear.mdl" },
-  { "Dear", "animal/wildlife_deer.mdl" },
-  { "Fox", "animal/wildlife_fox.mdl" },
-  { "Crane", "animal/bird_crane.mdl" },
-  { "Eagle", "animal/bird_eagle.mdl" },
-  { "Seagull", "animal/bird_gull.mdl" },
-  { "Salmon", "animal/fish_salmon.mdl" },
+  { name = "Brown Cow", uri = "animal/cow.mdl" },
+  { name = "Black Cow", uri = "animal/cow_2.mdl" },
+  { name = "Horse", uri = "animal/horse.mdl" },
+  { name = "Draft Horse", uri = "animal/draft_horse.mdl" },
+  { name = "Sheep", uri = "animal/sheep.mdl" },
+  { name = "Bear", uri = "animal/wildlife_bear.mdl" },
+  { name = "Dear", uri = "animal/wildlife_deer.mdl" },
+  { name = "Fox", uri = "animal/wildlife_fox.mdl" },
+  { name = "Crane", uri = "animal/bird_crane.mdl" },
+  { name = "Eagle", uri = "animal/bird_eagle.mdl" },
+  { name = "Seagull", uri = "animal/bird_gull.mdl" },
+  { name = "Salmon", uri = "animal/fish_salmon.mdl" },
 }
 local CATEGORIES = {"penta_nature_assets"}
 local SUB_CATEGORY = "Animals"

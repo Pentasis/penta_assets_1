@@ -1,11 +1,11 @@
 local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
-  { "", "headquarter/headquarter_era_a_01.mdl" },
-  { "", "headquarter/headquarter_era_a_02.mdl" },
-  { "", "headquarter/headquarter_era_b_03.mdl" },
-  { "", "headquarter/headquarter_era_b_04.mdl" },
-  { "", "headquarter/headquarter_era_c_05.mdl" },
+  { name = "", uri = "headquarter/headquarter_era_a_01.mdl" },
+  { name = "", uri = "headquarter/headquarter_era_a_02.mdl" },
+  { name = "", uri = "headquarter/headquarter_era_b_03.mdl" },
+  { name = "", uri = "headquarter/headquarter_era_b_04.mdl" },
+  { name = "", uri = "headquarter/headquarter_era_c_05.mdl" },
 }
 local CATEGORIES = {"penta_building_assets"}
 local SUB_CATEGORY = "General Buildings"

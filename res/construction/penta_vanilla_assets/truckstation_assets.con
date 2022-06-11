@@ -1,8 +1,8 @@
 local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
-  { "", "station/road/streetstation/platforms.mdl" },
-  { "", "station/road/streetstation/shelters.mdl" },
+  { name = "", uri = "station/road/streetstation/platforms.mdl" },
+  { name = "", uri = "station/road/streetstation/shelters.mdl" },
 }
 local CATEGORIES = {"penta_road_assets"}
 local SUB_CATEGORY = "Truck station Assets"

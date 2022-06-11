@@ -1,7 +1,7 @@
 local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
-  { "", "depot/rail/train_depot_era_a.mdl" },
+  { name = "", uri = "depot/rail/train_depot_era_a.mdl" },
 
 }
 local CATEGORIES = {"penta_rail_assets"}

@@ -1,21 +1,21 @@
 local helper = require "penta_assets/asset_helper"
 
 local MODELS = {
-  { "", "industry/farm/barn_large.mdl" },
-  { "", "industry/farm/barn_open.mdl" },
-  { "", "industry/farm/barn_small.mdl" },
-  { "", "industry/farm/cesspit.mdl" },
-  { "", "industry/farm/cow_barn.mdl" },
-  { "", "industry/farm/cow_barn_cort.mdl" },
-  { "", "industry/farm/fence.mdl" },
-  { "", "industry/farm/hay_cube.mdl" },
-  { "", "industry/farm/hay_flat.mdl" },
-  { "", "industry/farm/hay_flat_2.mdl" },
-  { "", "industry/farm/hay_pile.mdl" },
-  { "", "industry/farm/hay_pile_2.mdl" },
-  { "", "industry/farm/hay_round.mdl" },
-  { "", "industry/farm/silo.mdl" },
-  { "", "industry/farm/well.mdl" },
+  { name = "", uri = "industry/farm/barn_large.mdl" },
+  { name = "", uri = "industry/farm/barn_open.mdl" },
+  { name = "", uri = "industry/farm/barn_small.mdl" },
+  { name = "", uri = "industry/farm/cesspit.mdl" },
+  { name = "", uri = "industry/farm/cow_barn.mdl" },
+  { name = "", uri = "industry/farm/cow_barn_cort.mdl" },
+  { name = "", uri = "industry/farm/fence.mdl" },
+  { name = "", uri = "industry/farm/hay_cube.mdl" },
+  { name = "", uri = "industry/farm/hay_flat.mdl" },
+  { name = "", uri = "industry/farm/hay_flat_2.mdl" },
+  { name = "", uri = "industry/farm/hay_pile.mdl" },
+  { name = "", uri = "industry/farm/hay_pile_2.mdl" },
+  { name = "", uri = "industry/farm/hay_round.mdl" },
+  { name = "", uri = "industry/farm/silo.mdl" },
+  { name = "", uri = "industry/farm/well.mdl" },
 }
 local CATEGORIES = {"penta_rural_assets"}
 local SUB_CATEGORY = "Farms"
