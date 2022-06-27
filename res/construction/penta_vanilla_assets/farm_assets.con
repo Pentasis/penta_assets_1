@@ -4,7 +4,6 @@ local MODELS = {
   { name = "", uri = "industry/farm/barn_open.mdl" },
   { name = "", uri = "industry/farm/cesspit.mdl" },
   { name = "", uri = "industry/farm/cow_barn_cort.mdl" },
-  { name = "", uri = "industry/farm/fence.mdl" },
   { name = "", uri = "industry/farm/hay_cube.mdl" },
   { name = "", uri = "industry/farm/hay_flat.mdl" },
   { name = "", uri = "industry/farm/hay_pile.mdl" },

@@ -5,6 +5,7 @@ local MODELS = {
   { name = "", uri = "industry/saw_mill/side_building.mdl" },
   { name = "", uri = "industry/saw_mill/dry_house.mdl" },
   { name = "", uri = "industry/forest/era_a/forest_barrack_02.mdl" },
+  { name = "", uri = "industry/forest/era_a/forest_storage_02.mdl" },
   { name = "", uri = "industry/forest/main_building.mdl" },
   { name = "", uri = "industry/forest/side_building.mdl" },
 }

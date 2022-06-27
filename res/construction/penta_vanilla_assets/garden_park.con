@@ -18,7 +18,6 @@ local MODELS = {
   { name = "", uri = "asset/ground/era_b/garden_sunshade_small_02_a.mdl" },
   { name = "", uri = "asset/ground/era_b/garden_sunshade_small_02_b.mdl" },
   { name = "", uri = "asset/ground/fountain_1.mdl" },
-  { name = "", uri = "asset/ground/garden.mdl" },
   { name = "", uri = "asset/ground/garden_bench_ratan_01_end.mdl" },
   { name = "", uri = "asset/ground/garden_bench_ratan_01_repeat.mdl" },
   { name = "", uri = "asset/ground/garden_bench_ratan_01_start.mdl" },

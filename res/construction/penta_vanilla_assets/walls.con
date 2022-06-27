@@ -26,6 +26,7 @@ local MODELS = {
   { name = "", uri = "industry/machines_factory/era_a/brick_wall_pillar.mdl" },
   { name = "", uri = "industry/oil_refinery/era_a/oil_refinery_wall_large.mdl" },
   { name = "", uri = "industry/oil_refinery/era_a/oil_refinery_wall_small.mdl" },
+  { name = "", uri = "industry/farm/fence.mdl" },
 }
 local ASSET_CONFIG = {
   category = { "penta_wall_assets" },

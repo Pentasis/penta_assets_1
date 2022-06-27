@@ -5,8 +5,6 @@ local MODELS = {
   { name = "", uri = "industry/saw_mill/main_building_extension.mdl" },
   { name = "", uri = "industry/saw_mill/main_building_garage.mdl" },
   { name = "", uri = "industry/forest/era_a/axe.mdl" },
-  --{ name = "", uri = "industry/forest/era_a/forest_storage_01.mdl" },
-  { name = "", uri = "industry/forest/era_a/forest_storage_02.mdl" },
   { name = "", uri = "industry/forest/era_a/forest_wooden_box.mdl" },
   { name = "", uri = "industry/forest/era_a/tree_stump.mdl" },
   { name = "", uri = "industry/forest/stroage.mdl" },
