@@ -1,0 +1,104 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "station/air/airfield/airfield_decal_cracks_01.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_cracks_a.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_cracks_b.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_cracks_c.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_cracks_d.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_cracks_e.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_patches_a.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_patches_b.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_patches_c.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_patches_d.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_patches_e.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_decal_patches_f.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_runway.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_runway_markings.mdl" },
+  { name = "", uri = "station/air/airfield/airfield_runway_medium_lane.mdl" },
+  { name = "", uri = "station/air/airfield/apron.mdl" },
+  { name = "", uri = "station/air/airfield/cargo_terminal.mdl" },
+  { name = "", uri = "station/air/airfield/cargo_terminal_preview.mdl" },
+  { name = "", uri = "station/air/airfield/hangar.mdl" },
+  { name = "", uri = "station/air/airfield/hangar_preview.mdl" },
+  { name = "", uri = "station/air/airfield/main_building.mdl" },
+  { name = "", uri = "station/air/airfield/main_building_preview.mdl" },
+  { name = "", uri = "station/air/airfield/passenger_terminal.mdl" },
+  { name = "", uri = "station/air/airfield/passenger_terminal_preview.mdl" },
+  { name = "", uri = "station/air/airport/era_b_cargo_terminal.mdl" },
+  { name = "", uri = "station/air/airport/era_b_ct_asphalt_tile.mdl" },
+  { name = "", uri = "station/air/airport/era_b_ct_street_markings.mdl" },
+  { name = "", uri = "station/air/airport/era_b_hangar.mdl" },
+  { name = "", uri = "station/air/airport/era_b_h_asphalt_tile.mdl" },
+  { name = "", uri = "station/air/airport/era_b_h_street_markings.mdl" },
+  { name = "", uri = "station/air/airport/era_b_main_asphalt_tile.mdl" },
+  { name = "", uri = "station/air/airport/era_b_main_building.mdl" },
+  { name = "", uri = "station/air/airport/era_b_main_connection_lft.mdl" },
+  { name = "", uri = "station/air/airport/era_b_main_connection_rgt.mdl" },
+  { name = "", uri = "station/air/airport/era_b_main_connection_wall_lft.mdl" },
+  { name = "", uri = "station/air/airport/era_b_main_connection_wall_rgt.mdl" },
+  { name = "", uri = "station/air/airport/era_b_main_street_markings.mdl" },
+  { name = "", uri = "station/air/airport/era_b_passenger_terminal.mdl" },
+  { name = "", uri = "station/air/airport/era_b_pt_20m_patch.mdl" },
+  { name = "", uri = "station/air/airport/era_b_pt_asphalt_tile.mdl" },
+  { name = "", uri = "station/air/airport/era_b_pt_connection_lft.mdl" },
+  { name = "", uri = "station/air/airport/era_b_pt_connection_rgt.mdl" },
+  { name = "", uri = "station/air/airport/era_b_pt_connection_wall_lft.mdl" },
+  { name = "", uri = "station/air/airport/era_b_pt_connection_wall_rgt.mdl" },
+  { name = "", uri = "station/air/airport/era_b_pt_street_markings.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_01.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_02.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_03.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_04.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_05.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_06.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_07.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_08.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_09.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_10.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_11.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_12.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_13.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_14.mdl" },
+  { name = "", uri = "station/air/airport/era_b_sm_runway.mdl" },
+  { name = "", uri = "station/air/airport/era_c_sm_runway.mdl" },
+  { name = "", uri = "station/air/airport/terminalB.mdl" },
+  { name = "", uri = "station/air/airport/terminal_link.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_airport_assets" },
+  sub_category = "Structures",
+  description = "Airport structures",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

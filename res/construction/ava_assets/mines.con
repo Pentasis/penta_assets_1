@@ -1,0 +1,91 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "industry/coal_mine/era_a/coal_mine_entrance.mdl" },
+  { name = "", uri = "industry/coal_mine/era_a/coal_mine_l.mdl" },
+  { name = "", uri = "industry/coal_mine/era_a/coal_mine_modern_l.mdl" },
+  { name = "", uri = "industry/coal_mine/era_a/coal_mine_modern_r.mdl" },
+  { name = "", uri = "industry/coal_mine/era_a/coal_mine_r.mdl" },
+  { name = "", uri = "industry/coal_mine/era_a/transfer_building_large.mdl" },
+  { name = "", uri = "industry/coal_mine/era_a/transfer_building_small.mdl" },
+  { name = "", uri = "industry/coal_mine/new_big.mdl" },
+  { name = "", uri = "industry/coal_mine/new_small.mdl" },
+  { name = "", uri = "industry/coal_mine/old_left.mdl" },
+  { name = "", uri = "industry/coal_mine/old_right.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_main_building.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_ramp_large.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_ramp_small.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_side_building.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_stone_crusher_1.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_stone_crusher_2.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_stone_crusher_3.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_street_markings.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/era_a/iom_warehouse_1.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/excavator.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/main_building.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/side_building.mdl" },
+  { name = "", uri = "industry/iron_ore_mine/warehouse.mdl" },
+  { name = "", uri = "industry/quarry/crusher_connector.mdl" },
+  { name = "", uri = "industry/quarry/crusher_left.mdl" },
+  { name = "", uri = "industry/quarry/crusher_right.mdl" },
+  { name = "", uri = "industry/quarry/era_a/building_1.mdl" },
+  { name = "", uri = "industry/quarry/era_a/building_2.mdl" },
+  { name = "", uri = "industry/quarry/era_a/ramp_large.mdl" },
+  { name = "", uri = "industry/quarry/era_a/ramp_small.mdl" },
+  { name = "", uri = "industry/quarry/era_a/stone_crusher_1.mdl" },
+  { name = "", uri = "industry/quarry/era_a/stone_crusher_2.mdl" },
+  { name = "", uri = "industry/quarry/era_a/stone_crusher_3.mdl" },
+  { name = "", uri = "industry/quarry/quarry_new.mdl" },
+  { name = "", uri = "industry/quarry/quarry_old.mdl" },
+  { name = "", uri = "industry/quarry/stones.mdl" },
+  { name = "", uri = "industry/assets/era_a/excavator_era_a.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_cart.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_45_l.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_45_l_anim.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_45_r.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_45_r_anim.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_90_l.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_90_l_anim.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_90_r.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_curve_90_r_anim.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_straight.mdl" },
+  { name = "", uri = "industry/assets/era_a/mining_track_straight_anim.mdl" },
+
+}
+local ASSET_CONFIG = {
+  category = { "ava_industrial_assets" },
+  sub_category = "Mines",
+  description = "Mining assets",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

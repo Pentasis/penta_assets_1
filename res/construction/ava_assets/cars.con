@@ -1,0 +1,74 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "vehicle/car/avant.mdl" },
+  { name = "", uri = "vehicle/car/beetle_1948.mdl" },
+  { name = "", uri = "vehicle/car/cadillac_s62_deville.mdl" },
+  { name = "", uri = "vehicle/car/chevrolet_master_deluxe.mdl" },
+  { name = "", uri = "vehicle/car/citroen_hp5_typ_c.mdl" },
+  { name = "", uri = "vehicle/car/coach_01.mdl" },
+  { name = "", uri = "vehicle/car/coach_02.mdl" },
+  { name = "", uri = "vehicle/car/coach_03.mdl" },
+  { name = "", uri = "vehicle/car/coach_04.mdl" },
+  { name = "", uri = "vehicle/car/coach_05.mdl" },
+  { name = "", uri = "vehicle/car/coach_06.mdl" },
+  { name = "", uri = "vehicle/car/corolla.mdl" },
+  { name = "", uri = "vehicle/car/ford_fordor_1934.mdl" },
+  { name = "", uri = "vehicle/car/ford_f_series.mdl" },
+  { name = "", uri = "vehicle/car/ford_model_t.mdl" },
+  { name = "", uri = "vehicle/car/gaz_22_wolga.mdl" },
+  { name = "", uri = "vehicle/car/haval_h6.mdl" },
+  { name = "", uri = "vehicle/car/kim_10_50.mdl" },
+  { name = "", uri = "vehicle/car/lada_riva_2107.mdl" },
+  { name = "", uri = "vehicle/car/lincoln_town_car.mdl" },
+  { name = "", uri = "vehicle/car/nissan_datsun_240z.mdl" },
+  { name = "", uri = "vehicle/car/opel_kadett_e_carevan.mdl" },
+  { name = "", uri = "vehicle/car/opel_limo.mdl" },
+  { name = "", uri = "vehicle/car/pickup_1978.mdl" },
+  { name = "", uri = "vehicle/car/renault_4_f4_fourgonnette.mdl" },
+  { name = "", uri = "vehicle/car/subaru_legacy_kombi.mdl" },
+  { name = "", uri = "vehicle/car/tatra_600.mdl" },
+  { name = "", uri = "vehicle/car/toyota_mirai.mdl" },
+  { name = "", uri = "vehicle/car/trabant.mdl" },
+  { name = "", uri = "vehicle/car/vw_golf_1.mdl" },
+  { name = "", uri = "vehicle/car/vw_santana.mdl" },
+  { name = "", uri = "vehicle/car/vw_touran.mdl" },
+  { name = "", uri = "vehicle/car/vw_type_2_t1.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_vehicle_assets" },
+  sub_category = "Cars",
+  description = "Cars",
+  has_icon_button = true,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

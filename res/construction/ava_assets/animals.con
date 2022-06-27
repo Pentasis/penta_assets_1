@@ -1,0 +1,53 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "Brown Cow", uri = "animal/cow.mdl" },
+  { name = "Black Cow", uri = "animal/cow_2.mdl" },
+  { name = "Horse", uri = "animal/horse.mdl" },
+  { name = "Draft Horse", uri = "animal/draft_horse.mdl" },
+  { name = "Sheep", uri = "animal/sheep.mdl" },
+  { name = "Bear", uri = "animal/wildlife_bear.mdl" },
+  { name = "Dear", uri = "animal/wildlife_deer.mdl" },
+  { name = "Fox", uri = "animal/wildlife_fox.mdl" },
+  { name = "Crane", uri = "animal/bird_crane.mdl" },
+  { name = "Eagle", uri = "animal/bird_eagle.mdl" },
+  { name = "Seagull", uri = "animal/bird_gull.mdl" },
+  { name = "Salmon", uri = "animal/fish_salmon.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_nature_assets" },
+  sub_category = "Animals",
+  description = "Animals",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

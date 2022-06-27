@@ -1,0 +1,44 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "industry/farm/barn_large.mdl" },
+  { name = "", uri = "industry/farm/barn_small.mdl" },
+  { name = "", uri = "industry/farm/cow_barn.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_rural_assets" },
+  sub_category = "Farm buildings",
+  description = "Farm building",
+  has_icon_button = false,
+  has_magnet = true,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

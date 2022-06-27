@@ -1,0 +1,70 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "vehicle/bus/aboag.mdl" },
+  { name = "", uri = "vehicle/bus/asia/bk_670.mdl" },
+  { name = "", uri = "vehicle/bus/asia/droshky.mdl" },
+  { name = "", uri = "vehicle/bus/asia/dux.mdl" },
+  { name = "", uri = "vehicle/bus/asia/fuso_b46.mdl" },
+  { name = "", uri = "vehicle/bus/asia/gaggenau_c40.mdl" },
+  { name = "", uri = "vehicle/bus/asia/maz_103.mdl" },
+  { name = "", uri = "vehicle/bus/asia/troika.mdl" },
+  { name = "", uri = "vehicle/bus/asia/zis_155.mdl" },
+  { name = "", uri = "vehicle/bus/asia/zuhai_gtq_6186bevbt3.mdl" },
+  { name = "", uri = "vehicle/bus/benz_o6600.mdl" },
+  { name = "", uri = "vehicle/bus/berkhof_duvedec.mdl" },
+  { name = "", uri = "vehicle/bus/ecitaro.mdl" },
+  { name = "", uri = "vehicle/bus/et13.mdl" },
+  { name = "", uri = "vehicle/bus/landauer.mdl" },
+  { name = "", uri = "vehicle/bus/man_sl_192.mdl" },
+  { name = "", uri = "vehicle/bus/obeissante.mdl" },
+  { name = "", uri = "vehicle/bus/postkutsche.mdl" },
+  { name = "", uri = "vehicle/bus/saurer_tuescher.mdl" },
+  { name = "", uri = "vehicle/bus/usa/american_post_coach.mdl" },
+  { name = "", uri = "vehicle/bus/usa/chevrolet_c60_1974.mdl" },
+  { name = "", uri = "vehicle/bus/usa/d40.mdl" },
+  { name = "", uri = "vehicle/bus/usa/gm_fishbowl.mdl" },
+  { name = "", uri = "vehicle/bus/usa/horse_carriage.mdl" },
+  { name = "", uri = "vehicle/bus/usa/mack_1900_usa.mdl" },
+  { name = "", uri = "vehicle/bus/usa/schneider_pb2.mdl" },
+  { name = "", uri = "vehicle/bus/usa/twin_coach.mdl" },
+  { name = "", uri = "vehicle/bus/usa/wright_streetcar_rtv.mdl" },
+  { name = "", uri = "vehicle/bus/volvo_5000.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_vehicle_assets" },
+  sub_category = "Busses",
+  description = "Busses",
+  has_icon_button = true,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

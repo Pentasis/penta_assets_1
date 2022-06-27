@@ -1,0 +1,84 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "depot/road/tram_depot_catenary.mdl" },
+  { name = "", uri = "depot/road/tram_depot_era_a.mdl" },
+  { name = "", uri = "station/tram/small_mid.mdl" },
+  { name = "", uri = "station/tram/small_mid_tram.mdl" },
+  { name = "", uri = "station/tram/small_new.mdl" },
+  { name = "", uri = "station/tram/small_new_tram.mdl" },
+  { name = "", uri = "station/tram/small_old.mdl" },
+  { name = "", uri = "station/tram/small_old_catenary.mdl" },
+  { name = "", uri = "station/tram/very_large_mid.mdl" },
+  { name = "", uri = "station/tram/very_large_mid_tram.mdl" },
+  { name = "", uri = "station/tram/very_large_new.mdl" },
+  { name = "", uri = "station/tram/very_large_new_tram.mdl" },
+  { name = "", uri = "station/tram/very_large_old.mdl" },
+  { name = "", uri = "station/tram/very_large_old_catenary.mdl" },
+  { name = "", uri = "station/bus/large_mid.mdl" },
+  { name = "", uri = "station/bus/large_new.mdl" },
+  { name = "", uri = "station/bus/large_old.mdl" },
+  { name = "", uri = "station/bus/small_mid.mdl" },
+  { name = "", uri = "station/bus/small_new.mdl" },
+  { name = "", uri = "station/bus/small_old.mdl" },
+  { name = "", uri = "station/bus/station_diag" },
+  { name = "", uri = "station/bus/station_diag/cable_diag_extend_left.mdl" },
+  { name = "", uri = "station/bus/station_diag/cable_diag_extend_right.mdl" },
+  { name = "", uri = "station/bus/station_diag/cable_diag_platform.mdl" },
+  { name = "", uri = "station/bus/station_diag/cable_diag_turn.mdl" },
+  { name = "", uri = "station/bus/station_diag/curb_big_corner.mdl" },
+  { name = "", uri = "station/bus/station_diag/curb_end.mdl" },
+  { name = "", uri = "station/bus/station_diag/curb_extend.mdl" },
+  { name = "", uri = "station/bus/station_diag/curb_small_corner.mdl" },
+  { name = "", uri = "station/bus/station_diag/diag_extend_left.mdl" },
+  { name = "", uri = "station/bus/station_diag/diag_extend_right.mdl" },
+  { name = "", uri = "station/bus/station_diag/diag_platform.mdl" },
+  { name = "", uri = "station/bus/station_diag/diag_turn.mdl" },
+  { name = "", uri = "station/bus/station_diag/station_diag_enter.mdl" },
+  { name = "", uri = "station/bus/station_diag/station_diag_perron.mdl" },
+  { name = "", uri = "station/bus/station_diag/station_diag_platform.mdl" },
+  { name = "", uri = "station/bus/station_diag/station_diag_platform_mirror.mdl" },
+  { name = "", uri = "station/bus/station_diag/station_diag_turn.mdl" },
+  { name = "", uri = "station/bus/station_diag/station_diag_turn_mirror.mdl" },
+  { name = "", uri = "station/bus/station_diag/station_straight_platform.mdl" },
+  { name = "", uri = "station/bus/very_large_mid.mdl" },
+  { name = "", uri = "station/bus/very_large_new.mdl" },
+  { name = "", uri = "station/bus/very_large_old.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_road_assets" },
+  sub_category = "Tram & Bus Structures",
+  description = "Tram & Bus Structures",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

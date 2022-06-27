@@ -1,0 +1,68 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "vehicle/tram/asia/dl_3000_witt.mdl" },
+  { name = "", uri = "vehicle/tram/asia/ivan.mdl" },
+  { name = "", uri = "vehicle/tram/asia/kolomna.mdl" },
+  { name = "", uri = "vehicle/tram/asia/ktm_1.mdl" },
+  { name = "", uri = "vehicle/tram/asia/lm_68.mdl" },
+  { name = "", uri = "vehicle/tram/asia/lvs_86.mdl" },
+  { name = "", uri = "vehicle/tram/asia/moscow_f.mdl" },
+  { name = "", uri = "vehicle/tram/asia/odessa.mdl" },
+  { name = "", uri = "vehicle/tram/asia/st_petersburg.mdl" },
+  { name = "", uri = "vehicle/tram/asia/vityaz_m.mdl" },
+  { name = "", uri = "vehicle/tram/atm_4000.mdl" },
+  { name = "", uri = "vehicle/tram/be4_6mirage.mdl" },
+  { name = "", uri = "vehicle/tram/be5_6.mdl" },
+  { name = "", uri = "vehicle/tram/caf_urbos3.mdl" },
+  { name = "", uri = "vehicle/tram/dampftram.mdl" },
+  { name = "", uri = "vehicle/tram/halle.mdl" },
+  { name = "", uri = "vehicle/tram/schst.mdl" },
+  { name = "", uri = "vehicle/tram/strassenbahn1850.mdl" },
+  { name = "", uri = "vehicle/tram/typ1.mdl" },
+  { name = "", uri = "vehicle/tram/usa/horse_trolley_car.mdl" },
+  { name = "", uri = "vehicle/tram/usa/pcc_1643_pittsburgh.mdl" },
+  { name = "", uri = "vehicle/tram/usa/pcc_a_7.mdl" },
+  { name = "", uri = "vehicle/tram/usa/peter_witt_streetcar.mdl" },
+  { name = "", uri = "vehicle/tram/usa/san_diego.mdl" },
+  { name = "", uri = "vehicle/tram/usa/skoda_10t.mdl" },
+  { name = "", uri = "vehicle/tram/usa/strassenbahn1850_usa.mdl" },
+  { name = "", uri = "vehicle/tram/usa/toronto_clrv.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_vehicle_assets" },
+  sub_category = "Trams",
+  description = "Trams",
+  has_icon_button = true,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

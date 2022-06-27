@@ -1,15 +1,17 @@
+-- namespace: ava
+
 function data()
     return {
         info    = {
-            name           = "Consolidated Assets",
-            description    = "Expose all (!) vanilla models as assets.",
+            name           = "All Vanilla Assets (AVA)",
+            description    = "Expose all (usable) vanilla models as assets.",
             authors        = {
                 {
                     name = "Pentasis",
                     role = 'CREATOR',
                 },
             },
-            minorVersion   = 7,
+            minorVersion   = 1,
             severityAdd    = "WARNING",
             severityRemove = "CRITICAL",
             params         = {}

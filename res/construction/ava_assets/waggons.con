@@ -1,0 +1,106 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "vehicle/waggon/3axes_person.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/boxcar_as_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/boxcar_as_1900.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/boxcar_as_1950.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/china_type_25.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/china_type_25c.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/china_type_yz_22.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/egorov_20_2.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/gondola_as_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/gondola_as_1900.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/gondola_as_1950.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/nikolas_1st.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/putilov_3rd.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/russo_balt_3rd.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/stake_car_as_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/stake_car_as_1900.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/stake_car_as_1950.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/suburban_2nd.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/tankcar_as_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/tankcar_as_1900.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/tankcar_as_1950.mdl" },
+  { name = "", uri = "vehicle/waggon/asia/tvz_61_4447.mdl" },
+  { name = "", uri = "vehicle/waggon/bc4.mdl" },
+  { name = "", uri = "vehicle/waggon/boxcar_2000.mdl" },
+  { name = "", uri = "vehicle/waggon/compartment_car.mdl" },
+  { name = "", uri = "vehicle/waggon/d1_spanischb.mdl" },
+  { name = "", uri = "vehicle/waggon/donnerbuechse.mdl" },
+  { name = "", uri = "vehicle/waggon/ew_ii.mdl" },
+  { name = "", uri = "vehicle/waggon/ew_iv.mdl" },
+  { name = "", uri = "vehicle/waggon/gondola_2000.mdl" },
+  { name = "", uri = "vehicle/waggon/goods_1850_v2.mdl" },
+  { name = "", uri = "vehicle/waggon/hbi1_v2.mdl" },
+  { name = "", uri = "vehicle/waggon/kesselwagen_1860.mdl" },
+  { name = "", uri = "vehicle/waggon/kesselwagen_1910.mdl" },
+  { name = "", uri = "vehicle/waggon/kesselwagen_1950.mdl" },
+  { name = "", uri = "vehicle/waggon/open_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/open_1910.mdl" },
+  { name = "", uri = "vehicle/waggon/open_1975.mdl" },
+  { name = "", uri = "vehicle/waggon/rungenwagen_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/rungenwagen_1890.mdl" },
+  { name = "", uri = "vehicle/waggon/rungenwagen_1950.mdl" },
+  { name = "", uri = "vehicle/waggon/stake_car_2000.mdl" },
+  { name = "", uri = "vehicle/waggon/tankcar_2000.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/amfleet.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/bilevel.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/boxcar_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/boxcar_1902.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/boxcar_1945.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/golden_sand.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/gondola_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/gondola_1907.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/gondola_1955.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/parlor.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/pullman_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/pullman_1876.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/pullman_1900.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/stake_car_1850.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/stake_car_1895.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/stake_car_1952.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/streamlined_santa_fe.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/tankcar_1860.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/tankcar_1899.mdl" },
+  { name = "", uri = "vehicle/waggon/usa/tankcar_1948.mdl" },
+  { name = "", uri = "vehicle/waggon/verbandswagen_v2.mdl" },
+  { name = "", uri = "vehicle/waggon/wagen_bayrisch_1865.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_vehicle_assets" },
+  sub_category = "Waggons",
+  description = "Waggons",
+  has_icon_button = true,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_TRACK",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

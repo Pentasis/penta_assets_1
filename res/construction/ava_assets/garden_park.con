@@ -1,0 +1,87 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "asset/ground/era_a/garden_sunshade_01_a.mdl" },
+  { name = "", uri = "asset/ground/era_a/garden_sunshade_01_b.mdl" },
+  { name = "", uri = "asset/ground/era_a/garden_sunshade_02_a.mdl" },
+  { name = "", uri = "asset/ground/era_a/garden_sunshade_02_b.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_01_a.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_01_b.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_01_closed_a.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_01_closed_b.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_02_a.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_02_b.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_02_closed_a.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_large_02_closed_b.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_small_01_a.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_small_01_b.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_small_02_a.mdl" },
+  { name = "", uri = "asset/ground/era_b/garden_sunshade_small_02_b.mdl" },
+  { name = "", uri = "asset/ground/fountain_1.mdl" },
+  { name = "", uri = "asset/ground/garden_bench_ratan_01_end.mdl" },
+  { name = "", uri = "asset/ground/garden_bench_ratan_01_repeat.mdl" },
+  { name = "", uri = "asset/ground/garden_bench_ratan_01_start.mdl" },
+  { name = "", uri = "asset/ground/garden_bench_stone_01.mdl" },
+  { name = "", uri = "asset/ground/garden_bench_wood_01.mdl" },
+  { name = "", uri = "asset/ground/garden_bench_wood_02.mdl" },
+  { name = "", uri = "asset/ground/garden_chair_metal_01.mdl" },
+  { name = "", uri = "asset/ground/garden_chair_plastic_01.mdl" },
+  { name = "", uri = "asset/ground/garden_chair_wood_01.mdl" },
+  { name = "", uri = "asset/ground/garden_sunshade_large_01.mdl" },
+  { name = "", uri = "asset/ground/garden_sunshade_large_02.mdl" },
+  { name = "", uri = "asset/ground/garden_sunshade_large_closed_01.mdl" },
+  { name = "", uri = "asset/ground/garden_sunshade_large_closed_02.mdl" },
+  { name = "", uri = "asset/ground/garden_sunshade_small_01.mdl" },
+  { name = "", uri = "asset/ground/garden_sunshade_small_02.mdl" },
+  { name = "", uri = "asset/ground/garden_sun_pavillion_01.mdl" },
+  { name = "", uri = "asset/ground/garden_swing_01.mdl" },
+  { name = "", uri = "asset/ground/garden_swing_02.mdl" },
+  { name = "", uri = "asset/ground/garden_swing_03.mdl" },
+  { name = "", uri = "asset/ground/garden_swing_04.mdl" },
+  { name = "", uri = "asset/ground/garden_swing_05.mdl" },
+  { name = "", uri = "asset/ground/garden_table_metal_01.mdl" },
+  { name = "", uri = "asset/ground/garden_table_ratan_01.mdl" },
+  { name = "", uri = "asset/ground/garden_table_round_metal_01.mdl" },
+  { name = "", uri = "asset/ground/garden_table_round_wood_01.mdl" },
+  { name = "", uri = "asset/ground/garden_table_wood_01.mdl" },
+  { name = "", uri = "asset/ground/garden_table_wood_02.mdl" },
+  { name = "", uri = "asset/park_fountain_1.mdl" },
+  { name = "", uri = "asset/park_kiosk_1.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_residential_assets" },
+  sub_category = "Gardens & Parks",
+  description = "Garden and park assets",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

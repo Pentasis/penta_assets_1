@@ -1,0 +1,70 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "vehicle/ship/barge_big_tanker.mdl" },
+  { name = "", uri = "vehicle/ship/barge_small_tanker.mdl" },
+  { name = "", uri = "vehicle/ship/damen_ferry.mdl" },
+  { name = "", uri = "vehicle/ship/ds_schaffhausen.mdl" },
+  { name = "", uri = "vehicle/ship/dunara_castle.mdl" },
+  { name = "", uri = "vehicle/ship/dunara_castle_v2.mdl" },
+  { name = "", uri = "vehicle/ship/frontenac.mdl" },
+  { name = "", uri = "vehicle/ship/gms_axalp_v3.mdl" },
+  { name = "", uri = "vehicle/ship/graf_zeppelin.mdl" },
+  { name = "", uri = "vehicle/ship/herkules_xi.mdl" },
+  { name = "", uri = "vehicle/ship/herkules_xi_tanker.mdl" },
+  { name = "", uri = "vehicle/ship/herkules_xi_tanker_v2.mdl" },
+  { name = "", uri = "vehicle/ship/herkules_xi_v2.mdl" },
+  { name = "", uri = "vehicle/ship/klondike_v3.mdl" },
+  { name = "", uri = "vehicle/ship/merlin_v3.mdl" },
+  { name = "", uri = "vehicle/ship/rigi.mdl" },
+  { name = "", uri = "vehicle/ship/srn6.mdl" },
+  { name = "", uri = "vehicle/ship/vandal_v2.mdl" },
+  { name = "", uri = "vehicle/ship/viola_v2.mdl" },
+  { name = "", uri = "vehicle/ship/virgo.mdl" },
+  { name = "", uri = "vehicle/ship/virgo_tanker.mdl" },
+  { name = "", uri = "vehicle/ship/virgo_tanker_v2.mdl" },
+  { name = "", uri = "vehicle/ship/virgo_v2.mdl" },
+  { name = "", uri = "vehicle/ship/votrans.mdl" },
+  { name = "", uri = "vehicle/ship/votrans_tanker.mdl" },
+  { name = "", uri = "vehicle/ship/wilhelm_v3.mdl" },
+  { name = "", uri = "vehicle/ship/zoroaster_v2.mdl" },
+  { name = "", uri = "vehicle/ship/zoroaster_v3.mdl" },
+  { name = "", uri = "vehicle/ship/zurich.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_vehicle_assets" },
+  sub_category = "Ships",
+  description = "Ships",
+  has_icon_button = true,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

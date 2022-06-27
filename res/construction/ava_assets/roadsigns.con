@@ -1,0 +1,85 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "street/signal_waypoint.mdl" },
+  { name = "", uri = "street/sign/do_not_enter_eu_a.mdl" },
+  { name = "", uri = "street/sign/do_not_enter_eu_c.mdl" },
+  { name = "", uri = "street/sign/do_not_enter_us_a.mdl" },
+  { name = "", uri = "street/sign/do_not_enter_us_c.mdl" },
+  { name = "", uri = "street/sign/one_way_eu_a.mdl" },
+  { name = "", uri = "street/sign/one_way_eu_c.mdl" },
+  { name = "", uri = "street/sign/one_way_us_a.mdl" },
+  { name = "", uri = "street/sign/one_way_us_c.mdl" },
+  { name = "", uri = "street/street_light_eu_a.mdl" },
+  { name = "", uri = "street/street_light_eu_c.mdl" },
+  { name = "", uri = "street/street_light_us_a.mdl" },
+  { name = "", uri = "street/street_light_us_c.mdl" },
+  { name = "", uri = "street/traffic_light_eu_a/beam_1.mdl" },
+  { name = "", uri = "street/traffic_light_eu_a/beam_r.mdl" },
+  { name = "", uri = "street/traffic_light_eu_a/pedestrian_light.mdl" },
+  { name = "", uri = "street/traffic_light_eu_a/pedestrian_pole.mdl" },
+  { name = "", uri = "street/traffic_light_eu_a/pole.mdl" },
+  { name = "", uri = "street/traffic_light_eu_a/traffic_light_1.mdl" },
+  { name = "", uri = "street/traffic_light_eu_a/traffic_light_r.mdl" },
+  { name = "", uri = "street/traffic_light_eu_c/beam_1.mdl" },
+  { name = "", uri = "street/traffic_light_eu_c/beam_r.mdl" },
+  { name = "", uri = "street/traffic_light_eu_c/pedestrian_light.mdl" },
+  { name = "", uri = "street/traffic_light_eu_c/pedestrian_pole.mdl" },
+  { name = "", uri = "street/traffic_light_eu_c/pole.mdl" },
+  { name = "", uri = "street/traffic_light_eu_c/traffic_light_1.mdl" },
+  { name = "", uri = "street/traffic_light_eu_c/traffic_light_r.mdl" },
+  { name = "", uri = "street/traffic_light_us_a/beam_1.mdl" },
+  { name = "", uri = "street/traffic_light_us_a/beam_r.mdl" },
+  { name = "", uri = "street/traffic_light_us_a/pedestrian_light.mdl" },
+  { name = "", uri = "street/traffic_light_us_a/pedestrian_pole.mdl" },
+  { name = "", uri = "street/traffic_light_us_a/pole.mdl" },
+  { name = "", uri = "street/traffic_light_us_a/traffic_light_1.mdl" },
+  { name = "", uri = "street/traffic_light_us_a/traffic_light_r.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/beam_1.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/beam_2.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/beam_r.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/pedestrian_light.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/pedestrian_pole.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/pole.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/traffic_light_1.mdl" },
+  { name = "", uri = "street/traffic_light_us_c/traffic_light_r.mdl" },
+  { name = "", uri = "asset/lamp_new.mdl" },
+  { name = "", uri = "asset/lamp_old.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_road_assets" },
+  sub_category = "Signs & Lights",
+  description = "Road signs & Street lights",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end

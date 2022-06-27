@@ -1,0 +1,72 @@
+local helper = require "ava_assets/asset_helper"
+
+local MODELS = {
+  { name = "", uri = "station/rail/asset/cargo_lamps.mdl" },
+  { name = "", uri = "station/rail/asset/cargo_name_board.mdl" },
+  { name = "", uri = "station/rail/asset/cargo_pallet_jack.mdl" },
+  { name = "", uri = "station/rail/asset/cargo_sign_nr_l.mdl" },
+  { name = "", uri = "station/rail/asset/cargo_sign_nr_r.mdl" },
+  { name = "", uri = "station/rail/asset/cargo_speakers.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_big_clock.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_double_chair.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_holder_wall.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_perron_number.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_perron_pillar.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_single_chair.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_small_clock.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_station_name.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_street_pillar.mdl" },
+  { name = "", uri = "station/rail/asset/era_a_trashcan.mdl" },
+  { name = "", uri = "station/rail/asset/era_b_double_chair.mdl" },
+  { name = "", uri = "station/rail/asset/era_b_name_board.mdl" },
+  { name = "", uri = "station/rail/asset/era_b_sign_nr_l.mdl" },
+  { name = "", uri = "station/rail/asset/era_b_sign_nr_r.mdl" },
+  { name = "", uri = "station/rail/asset/era_b_trashcan.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_big_clock.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_double_chair.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_perron_holder.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_perron_number.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_perron_pillar.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_single_chair.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_small_clock.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_station_name.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_street_pillar.mdl" },
+  { name = "", uri = "station/rail/asset/era_c_trashcan.mdl" },
+}
+local ASSET_CONFIG = {
+  category = { "ava_rail_assets" },
+  sub_category = "Train station Assets",
+  description = "Train station Assets",
+  has_icon_button = false,
+  has_magnet = false,
+  has_track_height = false,
+  has_seperated_scales = false
+}
+
+-- ================================================================== --
+
+function data()
+
+  return {
+    type = "ASSET_DEFAULT",
+    description = {
+      name = ASSET_CONFIG.sub_category,
+      description = ASSET_CONFIG.description,
+    },
+    availability = {
+      yearFrom = 1850,
+      yearTo = 0,
+    },
+    buildMode = "MULTI",
+    categories = ASSET_CONFIG.category,
+    order = 100,
+    skipCollision = true,
+    autoRemovable = false,
+
+    params = helper.generateAssetParameters(ASSET_CONFIG, MODELS),
+
+    updateFn = function(params)
+      return helper.updateFnAsset(MODELS, params)
+    end
+  }
+end
